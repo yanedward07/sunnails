@@ -12,6 +12,8 @@ interface Props {
 }
 const { src, alt, sizes, class: className, eager = false } = Astro.props;
 const isSvg = src.format === 'svg';
+// never upscale: only offer widths the original can fill, plus the original itself
+const widths = [...[400, 700, 1000, 1400].filter((w) => w < src.width), Math.min(src.width, 1400)];
 ---
 {
   isSvg ? (
@@ -30,7 +32,7 @@ const isSvg = src.format === 'svg';
       src={src}
       alt={alt}
       sizes={sizes}
-      widths={[400, 700, 1000, 1400]}
+      widths={widths}
       formats={['avif', 'webp']}
       class={className}
       loading={eager ? 'eager' : 'lazy'}

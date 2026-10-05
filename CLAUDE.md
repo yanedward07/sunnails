@@ -31,11 +31,12 @@ A one-page marketing + booking site for **Sun Nails**, a nail spa at 384 Yonge S
 - **Mobile-first.** Check at 375–390px wide. There must be no horizontal scroll (`documentElement.scrollWidth === innerWidth`), tap targets must be ≥44px, and the sticky bottom Book bar is for phones (<900px).
 - Animate only `transform`/`opacity`/`clip-path`, and respect `prefers-reduced-motion` (handled globally in `global.css`).
 - Don't invent business facts (reviews, certifications, prices). Real content comes from the owner. Leave a `// TODO` if something is unknown.
-- Gallery images in `src/assets/nails/` are illustrated SVG placeholders until real nail photos are supplied.
-- Raw source photos/zips stay out of git (`*.zip` is ignored). The in-store menu photo shows the WiFi password, so never commit or publish it.
+- Gallery photos in `src/assets/nails/` are real client sets supplied by the owner. They are small (≤680px wide), and `Photo.astro` never upscales. Filenames become alt text, so name new files descriptively (`12-red-chrome-almond.jpg`).
+- The logo is a text wordmark (`Logo.astro`): "sun" + italic "nails", with the dot of the i drawn as an SVG sun. There is no image logo file; keep it as live text.
+- Raw source photos/zips dropped in the project root stay out of git (`*.zip` and root-level images are ignored). The in-store menu photo shows the WiFi password, so never commit or publish it.
 
 ## Open TODOs
 
 - Paste the Vagaro embed code + URL into `site.ts`.
-- Real nail photos for the gallery, the Instagram handle, an email (optional) and real reviews.
+- Higher-resolution nail photos if available, the Instagram handle, an email (optional) and real reviews.
 - Set the final domain in `astro.config.mjs` (`site`).

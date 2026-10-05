@@ -31,7 +31,7 @@ Drop images into these folders. They are resized and converted to AVIF/WebP auto
 - `src/assets/hero.jpg`: the big arched photo at the top.
 - `src/assets/storefront.jpg`: the storefront photo in "Visit us".
 - `src/assets/interior/`: the first 3 files (sorted by name) fill the "Our space" collage.
-- `src/assets/nails/`: the gallery. **The current files are illustrated placeholders.** Delete them and add real nail photos. Filenames become the alt text, so `05-chrome-cat-eye.jpg` becomes "chrome cat eye".
+- `src/assets/nails/`: the gallery (11 client sets right now). Files show in name order. Filenames become the alt text, so `12-chrome-cat-eye.jpg` becomes "chrome cat eye". Bigger originals (1000px+) look sharper.
 
 ## Vagaro booking
 

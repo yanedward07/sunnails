@@ -18,7 +18,7 @@ const colors = [
   <main class="brand container">
     <header class="b-section">
       <p class="eyebrow">Brand guide</p>
-      <Logo size="lg" />
+      <Logo size="lg" tagline />
       <p class="lede">Mood: <strong>Golden Hour</strong>. Warm, sun-washed, soft and confident. Think late-afternoon light through a window and freshly polished nails catching it.</p>
     </header>
 
@@ -29,7 +29,7 @@ const colors = [
         <div class="logo-tile logo-tile--dark"><Logo size="lg" /></div>
         <div class="logo-tile"><img src="/favicon.svg" alt="Sunnails icon" width="96" height="96" /></div>
       </div>
-      <p class="note">The mark is a rising sun over the horizon line. Keep clear space equal to the sun's height on every side.</p>
+      <p class="note">The logo is a wordmark: "sun" upright, "nails" in terracotta italic, and the dot of the <em>i</em> drawn as a rising sun. Always write it as one lowercase word. Keep clear space equal to the height of the "s" on every side. The sun on its own works as the app/social icon.</p>
     </section>
 
     <section class="b-section">
@@ -84,6 +84,11 @@ const colors = [
   .b-section {
     padding-block: 2.5rem;
     border-bottom: 1px dashed rgb(58 42 34 / 0.2);
+  }
+  header.b-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
   .b-section h2 {
     font-size: var(--step-2);
