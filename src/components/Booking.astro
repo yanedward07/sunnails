@@ -1,0 +1,179 @@
+---
+import { site, VAGARO_URL, VAGARO_EMBED } from '../data/site';
+
+const hasEmbed = VAGARO_EMBED.trim().length > 0;
+---
+<section class="section booking" id="book">
+  <div class="booking__sun" aria-hidden="true"></div>
+  <div class="container">
+    <div class="section-head booking__head">
+      <p class="eyebrow" data-reveal>Book</p>
+      <h2 data-reveal style="--i:1">Save your <em>seat</em> in the sun</h2>
+      <p data-reveal style="--i:2">Pick a service, a time and your favourite tech. You'll get a confirmation right away.</p>
+    </div>
+
+    <div class="card" data-reveal style="--i:3">
+      {
+        hasEmbed ? (
+          <>
+            <div class="vagaro-mount" data-vagaro>
+              <div class="loading">
+                <span class="loading__sun" />
+                Loading booking…
+              </div>
+            </div>
+            <template data-vagaro-embed set:html={VAGARO_EMBED} />
+          </>
+        ) : (
+          <div class="soon">
+            <p class="soon__title">Online booking is almost ready ✦</p>
+            <p>
+              In the meantime, call or text us at{' '}
+              <a href={`tel:${site.phone.replace(/[^\d+]/g, '')}`}>{site.phone}</a> and we'll find you a spot.
+            </p>
+          </div>
+        )
+      }
+
+      {
+        VAGARO_URL && (
+          <p class="card__fallback">
+            Trouble loading?{' '}
+            <a href={VAGARO_URL} target="_blank" rel="noopener">
+              Open booking in Vagaro ↗
+            </a>
+          </p>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .booking {
+    background: var(--cocoa);
+    color: var(--cream);
+    overflow: hidden;
+  }
+  .booking .eyebrow {
+    color: var(--gold);
+  }
+  .booking h2 em {
+    color: var(--apricot);
+  }
+  .booking .section-head p {
+    color: rgb(251 244 234 / 0.75);
+  }
+  .booking__sun {
+    position: absolute;
+    width: min(900px, 160vw);
+    aspect-ratio: 1;
+    right: -30%;
+    top: -35%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgb(233 148 91 / 0.45), rgb(201 96 63 / 0.15) 45%, transparent 68%);
+    pointer-events: none;
+    animation: breathe 9s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    50% {
+      transform: scale(1.08);
+      opacity: 0.8;
+    }
+  }
+  .booking .container {
+    position: relative;
+  }
+  .card {
+    background: var(--cream);
+    color: var(--text);
+    border-radius: var(--radius-lg);
+    padding: clamp(0.75rem, 3vw, 2rem);
+    box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.5);
+    min-height: 260px;
+  }
+  .vagaro-mount {
+    min-height: 220px;
+  }
+  /* keep Vagaro's widget fluid on phones */
+  .vagaro-mount :global(iframe) {
+    width: 100% !important;
+    max-width: 100%;
+    border: 0;
+  }
+  .loading {
+    display: grid;
+    place-items: center;
+    gap: 1rem;
+    min-height: 220px;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+  .loading__sun {
+    width: 48px;
+    height: 24px;
+    border-radius: 48px 48px 0 0;
+    background: var(--apricot);
+    animation: bob 1.4s var(--ease) infinite;
+  }
+  @keyframes bob {
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+  .soon {
+    display: grid;
+    gap: 0.6rem;
+    place-content: center;
+    text-align: center;
+    min-height: 220px;
+    padding: 1rem;
+  }
+  .soon__title {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+  }
+  .soon a,
+  .card__fallback a {
+    color: var(--terracotta-deep);
+    font-weight: 700;
+  }
+  .card__fallback {
+    text-align: center;
+    font-size: var(--step--1);
+    color: var(--text-muted);
+    margin-top: 1rem;
+  }
+</style>
+
+<script>
+  // Inject the Vagaro widget only when the booking section is close, so it never slows the first load.
+  const mount = document.querySelector<HTMLElement>('[data-vagaro]');
+  const tpl = document.querySelector<HTMLTemplateElement>('[data-vagaro-embed]');
+
+  if (mount && tpl) {
+    const inject = () => {
+      const frag = tpl.content.cloneNode(true) as DocumentFragment;
+      mount.replaceChildren();
+      // scripts added via a template don't run, so recreate them
+      frag.querySelectorAll('script').forEach((old) => {
+        const s = document.createElement('script');
+        [...old.attributes].forEach((a) => s.setAttribute(a.name, a.value));
+        s.textContent = old.textContent;
+        old.replaceWith(s);
+      });
+      mount.append(frag);
+    };
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          io.disconnect();
+          inject();
+        }
+      },
+      { rootMargin: '800px 0px' },
+    );
+    io.observe(mount);
+  }
+</script>

@@ -1,0 +1,191 @@
+---
+import { services } from '../data/site';
+---
+<section class="section services" id="services">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow" data-reveal>Menu</p>
+      <h2 data-reveal style="--i:1">Services <em>&amp;</em> prices</h2>
+      <p data-reveal style="--i:2">Nail care, waxing, lashes, facials and massage, all under one roof. Prices are before tax.</p>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Service categories" data-tabs data-reveal style="--i:3">
+      {
+        services.map((cat, i) => (
+          <button
+            role="tab"
+            id={`tab-${cat.id}`}
+            aria-controls={`panel-${cat.id}`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            tabindex={i === 0 ? 0 : -1}
+          >
+            {cat.label}
+          </button>
+        ))
+      }
+    </div>
+
+    {
+      services.map((cat, i) => (
+        <div class="panel" role="tabpanel" id={`panel-${cat.id}`} aria-labelledby={`tab-${cat.id}`} hidden={i !== 0}>
+          <ul class="list">
+            {cat.items.map((s, j) => (
+              <li class="item" style={`--i:${j}`}>
+                <span class="item__name">
+                  {s.name}
+                  {s.mins && <span class="item__mins">{s.mins} min</span>}
+                </span>
+                <span class="item__dots" aria-hidden="true" />
+                <span class="item__price">{s.price}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="panel__foot">
+            <a href="#book" class="btn">
+              Book {cat.label.toLowerCase()}
+            </a>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .services {
+    background: linear-gradient(var(--bg), var(--sand) 30%, var(--sand));
+  }
+  .tabs {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin-inline: calc(-1 * var(--gutter));
+    padding: 0.25rem var(--gutter) 1.25rem;
+    scroll-snap-type: x proximity;
+    scroll-padding-inline: var(--gutter);
+  }
+  .tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .tabs button {
+    flex: none;
+    scroll-snap-align: start;
+    min-height: 46px;
+    padding: 0.6rem 1.3rem;
+    border-radius: var(--pill);
+    border: 1.5px solid rgb(58 42 34 / 0.25);
+    background: transparent;
+    color: var(--text);
+    font: 700 var(--step--1) / 1 var(--font-body);
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
+  }
+  .tabs button:hover {
+    border-color: var(--cocoa);
+  }
+  .tabs button[aria-selected='true'] {
+    background: var(--cocoa);
+    border-color: var(--cocoa);
+    color: var(--cream);
+  }
+
+  .panel {
+    background: var(--cream);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.25rem, 4vw, 2.75rem);
+    box-shadow: var(--shadow);
+  }
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    padding: 0.85rem 0;
+    animation: rise 0.6s var(--ease) both;
+    animation-delay: calc(var(--i) * 40ms);
+  }
+  .item__name {
+    font-family: var(--font-display);
+    font-variation-settings: 'SOFT' 100, 'opsz' 30;
+    font-size: var(--step-1);
+    line-height: 1.25;
+  }
+  .item__mins {
+    display: inline-block;
+    margin-left: 0.5rem;
+    padding: 0.1rem 0.55rem;
+    border-radius: var(--pill);
+    background: var(--sand);
+    font: 700 0.75rem / 1.5 var(--font-body);
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    vertical-align: 0.2em;
+  }
+  .item__dots {
+    flex: 1;
+    min-width: 1.5rem;
+    border-bottom: 2px dotted rgb(58 42 34 / 0.3);
+    transform: translateY(-0.3em);
+  }
+  .item__price {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    color: var(--terracotta-deep);
+    white-space: nowrap;
+  }
+  .panel__foot {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .tabs {
+      margin-inline: 0;
+      padding-inline: 0;
+      flex-wrap: wrap;
+    }
+    .list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 3.5rem;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-tabs]').forEach((list) => {
+    const tabs = [...list.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+    const select = (tab: HTMLButtonElement, focus = false) => {
+      tabs.forEach((t) => {
+        const on = t === tab;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute('aria-controls')!)!.hidden = !on;
+      });
+      // keep the chosen chip visible in the scrolling row without moving the page
+      list.scrollTo({ left: tab.offsetLeft - list.offsetLeft - 16, behavior: 'smooth' });
+      if (focus) tab.focus();
+    };
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => select(tab));
+      tab.addEventListener('keydown', (e) => {
+        const dir = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (dir) select(tabs[(i + dir + tabs.length) % tabs.length], true);
+      });
+    });
+  });
+</script>

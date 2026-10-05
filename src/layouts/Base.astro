@@ -1,0 +1,56 @@
+---
+import '@fontsource-variable/fraunces/soft.css';
+import '@fontsource-variable/fraunces/soft-italic.css';
+import '@fontsource-variable/manrope/wght.css';
+import '../styles/global.css';
+import { site, hours } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+const { title = `${site.name} | Nail Spa on Yonge St, Toronto`, description = site.description, noindex = false } =
+  Astro.props;
+
+const toH24 = (t: string) => {
+  const [, h, m, ap] = t.match(/(\d+):(\d+)\s*(AM|PM)/i) ?? [];
+  let hh = Number(h) % 12;
+  if (ap?.toUpperCase() === 'PM') hh += 12;
+  return `${String(hh).padStart(2, '0')}:${m}`;
+};
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'NailSalon',
+  name: site.name,
+  description: site.description,
+  telephone: site.phone,
+  address: { '@type': 'PostalAddress', streetAddress: site.address.line1, addressLocality: 'Toronto', addressRegion: 'ON', postalCode: 'M5G 2K2', addressCountry: 'CA' },
+  url: Astro.site?.toString(),
+  openingHoursSpecification: hours
+    .filter((h) => h.open && h.close)
+    .map((h) => ({ '@type': 'OpeningHoursSpecification', dayOfWeek: h.day, opens: toH24(h.open!), closes: toH24(h.close!) })),
+};
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="theme-color" content="#FBF4EA" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

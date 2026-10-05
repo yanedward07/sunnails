@@ -1,0 +1,234 @@
+---
+import Logo from './Logo.astro';
+
+const links = [
+  { href: '#services', label: 'Services' },
+  { href: '#gallery', label: 'Gallery' },
+  { href: '#space', label: 'Our space' },
+  { href: '#visit', label: 'Visit' },
+];
+---
+<header class="header" data-header>
+  <div class="header__inner container">
+    <a href="#top" class="header__logo" aria-label="Sunnails home"><Logo /></a>
+
+    <nav class="header__nav" aria-label="Main">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+
+    <a href="#book" class="btn btn--sm header__book">Book now</a>
+
+    <button class="header__toggle" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+      <span class="visually-hidden">Menu</span>
+      <span class="burger" aria-hidden="true"><span></span><span></span></span>
+    </button>
+  </div>
+</header>
+
+<div class="menu" id="mobile-menu" data-menu hidden>
+  <nav aria-label="Mobile">
+    <ul>
+      {
+        links.map((l, i) => (
+          <li style={`--i:${i}`}>
+            <a href={l.href} data-menu-link>
+              {l.label}
+            </a>
+          </li>
+        ))
+      }
+      <li style={`--i:${links.length}`}>
+        <a href="#book" class="menu__book" data-menu-link>Book now →</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="menu__sun" aria-hidden="true"></div>
+</div>
+
+<style>
+  .header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 50;
+    padding-top: env(safe-area-inset-top);
+    transition: background 0.4s, box-shadow 0.4s, backdrop-filter 0.4s;
+  }
+  .header.is-scrolled {
+    background: rgb(251 244 234 / 0.82);
+    backdrop-filter: blur(14px) saturate(1.4);
+    -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    box-shadow: 0 1px 0 rgb(58 42 34 / 0.08);
+  }
+  .header__inner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: 4.25rem;
+  }
+  .header__logo {
+    text-decoration: none;
+    margin-right: auto;
+    position: relative;
+    z-index: 2;
+  }
+  .header__nav {
+    display: none;
+    gap: 2rem;
+    font-weight: 600;
+  }
+  .header__nav a {
+    text-decoration: none;
+    position: relative;
+    padding-block: 0.4rem;
+  }
+  .header__nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--apricot);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s var(--ease);
+  }
+  .header__nav a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  .header__book {
+    display: none;
+  }
+  .header__toggle {
+    position: relative;
+    z-index: 2;
+    width: 48px;
+    height: 48px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--cocoa);
+    color: var(--cream);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+  .burger {
+    display: grid;
+    gap: 6px;
+    width: 18px;
+  }
+  .burger span {
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transition: transform 0.4s var(--ease);
+  }
+  [aria-expanded='true'] .burger span:first-child {
+    transform: translateY(4px) rotate(45deg);
+  }
+  [aria-expanded='true'] .burger span:last-child {
+    transform: translateY(-4px) rotate(-45deg);
+  }
+
+  /* full-screen mobile menu */
+  .menu {
+    position: fixed;
+    inset: 0;
+    z-index: 45;
+    background: var(--sand);
+    display: grid;
+    align-content: center;
+    padding: 6rem var(--gutter) calc(2rem + env(safe-area-inset-bottom));
+    overflow: hidden;
+    clip-path: circle(0% at calc(100% - 2.5rem) 2.2rem);
+    transition: clip-path 0.7s var(--ease);
+  }
+  .menu.is-open {
+    clip-path: circle(150% at calc(100% - 2.5rem) 2.2rem);
+  }
+  .menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.4rem;
+    position: relative;
+    z-index: 1;
+  }
+  .menu li {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+    transition-delay: calc(0.15s + var(--i) * 0.06s);
+  }
+  .menu.is-open li {
+    opacity: 1;
+    transform: none;
+  }
+  .menu a {
+    display: block;
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 11vw, 3.4rem);
+    line-height: 1.2;
+    text-decoration: none;
+    padding-block: 0.15rem;
+  }
+  .menu .menu__book {
+    font-style: italic;
+    color: var(--terracotta-deep);
+  }
+  .menu__sun {
+    position: absolute;
+    width: 120vw;
+    aspect-ratio: 2 / 1;
+    left: -10vw;
+    bottom: -40vw;
+    border-radius: 120vw 120vw 0 0;
+    background: radial-gradient(circle at 50% 100%, var(--apricot), var(--blush) 60%, transparent 72%);
+    opacity: 0.55;
+  }
+
+  @media (min-width: 900px) {
+    .header__nav,
+    .header__book {
+      display: inline-flex;
+    }
+    .header__toggle,
+    .menu {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]')!;
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]')!;
+  const menu = document.querySelector<HTMLElement>('[data-menu]')!;
+
+  const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 20);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const setOpen = (open: boolean) => {
+    toggle.setAttribute('aria-expanded', String(open));
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+    if (open) {
+      menu.hidden = false;
+      requestAnimationFrame(() => menu.classList.add('is-open'));
+    } else {
+      menu.classList.remove('is-open');
+      setTimeout(() => {
+        if (!menu.classList.contains('is-open')) menu.hidden = true;
+      }, 700);
+    }
+  };
+
+  toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+  menu.querySelectorAll('[data-menu-link]').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') setOpen(false);
+  });
+  window.matchMedia('(min-width: 900px)').addEventListener('change', (e) => e.matches && setOpen(false));
+</script>

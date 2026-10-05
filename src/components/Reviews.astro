@@ -1,0 +1,126 @@
+---
+import { reviews } from '../data/site';
+---
+<section class="section reviews" aria-labelledby="reviews-title">
+  <div class="container reviews__inner">
+    <p class="eyebrow" data-reveal>Kind words</p>
+    <h2 id="reviews-title" class="visually-hidden">Reviews</h2>
+
+    <div class="quotes" data-quotes aria-live="polite" data-reveal style="--i:1">
+      {
+        reviews.map((r, i) => (
+          <figure class="quote" data-active={i === 0 ? '' : undefined} aria-hidden={i === 0 ? 'false' : 'true'}>
+            <blockquote>“{r.quote}”</blockquote>
+            <figcaption>{r.name}</figcaption>
+          </figure>
+        ))
+      }
+    </div>
+
+    <div class="dots" role="group" aria-label="Choose review">
+      {reviews.map((_, i) => <button aria-label={`Review ${i + 1}`} aria-current={i === 0 ? 'true' : 'false'} data-dot={i} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .reviews {
+    text-align: center;
+    background:
+      radial-gradient(50% 70% at 50% 100%, rgb(233 148 91 / 0.22), transparent 70%),
+      var(--bg);
+  }
+  .reviews__inner {
+    display: grid;
+    justify-items: center;
+  }
+  .quotes {
+    display: grid;
+    max-width: 52rem;
+    width: 100%;
+  }
+  .quote {
+    grid-area: 1 / 1;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+    pointer-events: none;
+  }
+  .quote[data-active] {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+  blockquote {
+    margin: 0;
+    font-family: var(--font-display);
+    font-variation-settings: 'SOFT' 100, 'opsz' 100;
+    font-size: var(--step-3);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+  figcaption {
+    margin-top: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-size: var(--step--1);
+    color: var(--terracotta-deep);
+  }
+  .dots {
+    display: flex;
+    gap: 0.25rem;
+    margin-top: 2rem;
+  }
+  .dots button {
+    width: 44px;
+    height: 44px;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+  }
+  .dots button::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    background: rgb(58 42 34 / 0.25);
+    transition: width 0.4s var(--ease), background 0.4s;
+  }
+  .dots button[aria-current='true']::before {
+    width: 26px;
+    background: var(--terracotta);
+  }
+</style>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-quotes]')!;
+  const quotes = [...root.querySelectorAll<HTMLElement>('.quote')];
+  const dots = [...document.querySelectorAll<HTMLButtonElement>('[data-dot]')];
+  let i = 0;
+  let paused = false;
+
+  const go = (n: number) => {
+    i = (n + quotes.length) % quotes.length;
+    quotes.forEach((q, j) => {
+      q.toggleAttribute('data-active', j === i);
+      q.setAttribute('aria-hidden', String(j !== i));
+    });
+    dots.forEach((d, j) => d.setAttribute('aria-current', String(j === i)));
+  };
+
+  dots.forEach((d, j) => d.addEventListener('click', () => go(j)));
+  const section = root.closest('section')!;
+  section.addEventListener('pointerenter', () => (paused = true));
+  section.addEventListener('pointerleave', () => (paused = false));
+  section.addEventListener('focusin', () => (paused = true));
+  section.addEventListener('focusout', () => (paused = false));
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    setInterval(() => !paused && !document.hidden && go(i + 1), 6000);
+  }
+</script>

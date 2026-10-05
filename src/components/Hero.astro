@@ -1,0 +1,179 @@
+---
+import Photo from './Photo.astro';
+import { heroImage, nailImages } from '../lib/images';
+import { site } from '../data/site';
+
+const heroImg = heroImage
+  ? { src: heroImage, alt: 'Pedicure lounge at Sun Nails with massage chairs and a glowing Relax Refresh Renew sign' }
+  : nailImages[0];
+---
+<section class="hero" id="top">
+  <div class="hero__glow" aria-hidden="true"></div>
+
+  <div class="hero__inner container">
+    <div class="hero__copy">
+      <p class="eyebrow" data-reveal>Nail spa · Toronto</p>
+      <h1 data-reveal style="--i:1">
+        Relax, refresh,<br /> <em>renew</em>.
+      </h1>
+      <p class="hero__lede" data-reveal style="--i:2">
+        Manicures, spa pedicures, Bio Gel and nail art, plus waxing, lash lifts, facials and massage. Sit back in a massage chair and leave glowing.
+      </p>
+      <div class="hero__ctas" data-reveal style="--i:3">
+        <a href="#book" class="btn">Book an appointment</a>
+        <a href="#services" class="btn btn--ghost">See services</a>
+      </div>
+    </div>
+
+    <div class="hero__art">
+      <div class="hero__sun" aria-hidden="true">
+        <svg viewBox="0 0 200 200">
+          <g stroke="var(--gold)" stroke-width="2.4" stroke-linecap="round">
+            {Array.from({ length: 24 }, (_, i) => <line x1="100" y1="6" x2="100" y2={i % 2 ? 18 : 26} transform={`rotate(${i * 15} 100 100)`} />)}
+          </g>
+        </svg>
+      </div>
+
+      {
+        heroImg && (
+          <div class="hero__photo" data-reveal="polish" style="--i:1">
+            <Photo src={heroImg.src} alt={heroImg.alt} sizes="(min-width: 900px) 40vw, 80vw" eager />
+          </div>
+        )
+      }
+
+      <a href="#book" class="hero__sticker" aria-label="Book online">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <defs><path id="circ" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"></path></defs>
+          <circle cx="60" cy="60" r="58" fill="var(--cocoa)"></circle>
+          <text>
+            <textPath href="#circ" fill="var(--cream)" font-size="11.5" font-weight="700" letter-spacing="3.1">
+              BOOK ONLINE ✦ {site.name.toUpperCase()} ✦
+            </textPath>
+          </text>
+        </svg>
+        <span class="hero__sticker-arrow">↘</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: grid;
+    align-items: center;
+    padding-top: calc(5.5rem + env(safe-area-inset-top));
+    padding-bottom: 3rem;
+    overflow: hidden;
+  }
+  .hero__glow {
+    position: absolute;
+    inset: 0;
+    background: var(--glow);
+    pointer-events: none;
+  }
+  .hero__inner {
+    position: relative;
+    display: grid;
+    gap: 3rem;
+  }
+  .hero h1 {
+    font-size: var(--step-4);
+  }
+  .hero__lede {
+    margin-top: 1.4rem;
+    max-width: 34rem;
+    font-size: var(--step-1);
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+  .hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .hero__art {
+    position: relative;
+    justify-self: center;
+    width: min(82vw, 420px);
+    aspect-ratio: 4 / 5;
+  }
+  .hero__sun {
+    position: absolute;
+    inset: -14%;
+    animation: spin 60s linear infinite;
+  }
+  .hero__sun::before {
+    content: '';
+    position: absolute;
+    inset: 16%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgb(233 148 91 / 0.5), rgb(242 196 179 / 0.25) 55%, transparent 70%);
+  }
+  .hero__sun svg {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  .hero__photo {
+    position: relative;
+    height: 100%;
+    border-radius: 999px 999px var(--radius-lg) var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    --radius-lg: 999px 999px 36px 36px;
+  }
+  .hero__photo :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero__sticker {
+    position: absolute;
+    left: -6%;
+    bottom: 4%;
+    width: clamp(92px, 26vw, 128px);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    color: var(--gold);
+    text-decoration: none;
+    transition: transform 0.5s var(--ease);
+  }
+  .hero__sticker svg {
+    position: absolute;
+    inset: 0;
+    animation: spin 18s linear infinite;
+  }
+  .hero__sticker-arrow {
+    position: relative;
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+  .hero__sticker:hover {
+    transform: scale(1.07) rotate(-6deg);
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (min-width: 900px) {
+    .hero__inner {
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 4rem;
+    }
+    .hero__art {
+      width: 100%;
+      max-width: 440px;
+      justify-self: end;
+    }
+  }
+</style>

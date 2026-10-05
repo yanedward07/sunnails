@@ -1,0 +1,252 @@
+---
+import Photo from './Photo.astro';
+import { nailImages } from '../lib/images';
+import { site } from '../data/site';
+---
+<section class="section gallery" id="gallery">
+  <div class="container">
+    <div class="gallery__head">
+      <div class="section-head">
+        <p class="eyebrow" data-reveal>Gallery</p>
+        <h2 data-reveal style="--i:1">Chrome, cat eye <em>&amp;</em> more</h2>
+      </div>
+      {
+        site.instagram && (
+          <a class="gallery__ig" href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noopener" data-reveal style="--i:2">
+            More on Instagram @{site.instagram} ↗
+          </a>
+        )
+      }
+    </div>
+
+    <ul class="grid" data-gallery>
+      {
+        nailImages.map((img, i) => (
+          <li class="tile">
+            <button class="tile__btn" data-index={i} data-reveal="polish" style={`--i:${i % 3}`} aria-label={`Open photo: ${img.alt}`}>
+              <Photo src={img.src} alt={img.alt} sizes="(min-width: 1100px) 380px, (min-width: 768px) 33vw, 75vw" />
+            </button>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="gallery__hint" aria-hidden="true">Swipe <span>→</span></p>
+  </div>
+
+  <dialog class="lightbox" data-lightbox aria-label="Photo viewer">
+    <img alt="" data-lightbox-img />
+    <button class="lightbox__close" data-lightbox-close aria-label="Close">✕</button>
+    <button class="lightbox__nav lightbox__nav--prev" data-lightbox-prev aria-label="Previous photo">←</button>
+    <button class="lightbox__nav lightbox__nav--next" data-lightbox-next aria-label="Next photo">→</button>
+  </dialog>
+</section>
+
+<style>
+  .gallery__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: 0 2rem;
+  }
+  .gallery__ig {
+    font-weight: 700;
+    color: var(--terracotta-deep);
+    margin-bottom: clamp(2rem, 5vw, 3.5rem);
+    text-underline-offset: 4px;
+  }
+
+  /* mobile: swipeable carousel */
+  .grid {
+    list-style: none;
+    margin: 0 calc(-1 * var(--gutter));
+    padding: 0.5rem var(--gutter) 1rem;
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+  .grid::-webkit-scrollbar {
+    display: none;
+  }
+  .tile {
+    flex: 0 0 72%;
+    scroll-snap-align: start;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .tile:nth-child(odd) {
+    --radius-lg: 999px 999px 36px 36px;
+  }
+  .tile__btn {
+    --radius-lg: inherit;
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: var(--sand);
+    cursor: zoom-in;
+  }
+  .tile :global(img) {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    transition: transform 0.9s var(--ease);
+  }
+  .tile__btn:hover :global(img) {
+    transform: scale(1.05);
+  }
+  .gallery__hint {
+    margin-top: 0.5rem;
+    font-size: var(--step--1);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .gallery__hint span {
+    display: inline-block;
+    animation: nudge 1.6s var(--ease) infinite;
+  }
+  @keyframes nudge {
+    50% {
+      transform: translateX(6px);
+    }
+  }
+
+  /* desktop: masonry */
+  @media (min-width: 768px) {
+    .grid {
+      display: block;
+      columns: 3;
+      column-gap: 1.25rem;
+      margin: 0;
+      padding: 0;
+      overflow: visible;
+    }
+    .tile {
+      break-inside: avoid;
+      margin-bottom: 1.25rem;
+    }
+    .tile :global(img) {
+      aspect-ratio: auto;
+    }
+    .gallery__hint {
+      display: none;
+    }
+  }
+
+  /* lightbox */
+  .lightbox {
+    width: 100vw;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: rgb(30 20 15 / 0.92);
+    display: none;
+    place-items: center;
+  }
+  .lightbox[open] {
+    display: grid;
+    animation: fade 0.35s var(--ease);
+  }
+  .lightbox::backdrop {
+    background: transparent;
+  }
+  .lightbox img {
+    max-width: min(92vw, 900px);
+    max-height: 82dvh;
+    width: auto;
+    border-radius: var(--radius);
+    object-fit: contain;
+  }
+  .lightbox button {
+    position: absolute;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 0;
+    background: var(--cream);
+    color: var(--cocoa);
+    font-size: 1.3rem;
+    cursor: pointer;
+  }
+  .lightbox__close {
+    top: calc(1rem + env(safe-area-inset-top));
+    right: 1rem;
+  }
+  .lightbox__nav {
+    bottom: calc(1.5rem + env(safe-area-inset-bottom));
+  }
+  .lightbox__nav--prev {
+    left: calc(50% - 64px);
+  }
+  .lightbox__nav--next {
+    right: calc(50% - 64px);
+  }
+  @media (min-width: 768px) {
+    .lightbox__nav {
+      bottom: auto;
+      top: 50%;
+      translate: 0 -50%;
+    }
+    .lightbox__nav--prev {
+      left: 2rem;
+    }
+    .lightbox__nav--next {
+      right: 2rem;
+    }
+  }
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('[data-lightbox]')!;
+  const big = dialog.querySelector<HTMLImageElement>('[data-lightbox-img]')!;
+  const tiles = [...document.querySelectorAll<HTMLButtonElement>('[data-gallery] [data-index]')];
+  let current = 0;
+
+  const show = (i: number) => {
+    current = (i + tiles.length) % tiles.length;
+    const img = tiles[current].querySelector('img')!;
+    big.src = img.currentSrc || img.src;
+    big.alt = img.alt;
+  };
+
+  tiles.forEach((t, i) =>
+    t.addEventListener('click', () => {
+      show(i);
+      dialog.showModal();
+      document.documentElement.style.overflow = 'hidden';
+    }),
+  );
+  dialog.addEventListener('close', () => (document.documentElement.style.overflow = ''));
+  dialog.querySelector('[data-lightbox-close]')!.addEventListener('click', () => dialog.close());
+  dialog.querySelector('[data-lightbox-prev]')!.addEventListener('click', () => show(current - 1));
+  dialog.querySelector('[data-lightbox-next]')!.addEventListener('click', () => show(current + 1));
+  dialog.addEventListener('click', (e) => e.target === dialog && dialog.close());
+  dialog.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') show(current + 1);
+    if (e.key === 'ArrowLeft') show(current - 1);
+  });
+
+  // swipe between photos
+  let x0: number | null = null;
+  dialog.addEventListener('touchstart', (e) => (x0 = e.touches[0].clientX), { passive: true });
+  dialog.addEventListener('touchend', (e) => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 50) show(current + (dx < 0 ? 1 : -1));
+    x0 = null;
+  });
+</script>

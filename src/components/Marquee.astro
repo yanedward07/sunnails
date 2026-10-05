@@ -1,0 +1,64 @@
+---
+import { marquee } from '../data/site';
+const items = [...marquee, ...marquee];
+---
+<div class="marquee-wrap" aria-hidden="true">
+<div class="marquee">
+  <div class="marquee__track">
+    {
+      items.map((t) => (
+        <span class="marquee__item">
+          {t}
+          <svg viewBox="0 0 24 14">
+            <path d="M2 13a10 10 0 0 1 20 0z" fill="currentColor" />
+          </svg>
+        </span>
+      ))
+    }
+  </div>
+</div>
+</div>
+
+<style>
+  .marquee-wrap {
+    overflow: hidden;
+    padding-block: 1.5rem;
+    margin-block: -1.5rem;
+    position: relative;
+    z-index: 2;
+  }
+  .marquee {
+    background: var(--cocoa);
+    color: var(--cream);
+    overflow: hidden;
+    padding-block: 1.1rem;
+    transform: rotate(-1.5deg);
+    margin-inline: -2rem;
+    position: relative;
+    z-index: 2;
+  }
+  .marquee__track {
+    display: flex;
+    width: max-content;
+    animation: marquee 32s linear infinite;
+  }
+  .marquee__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.6rem;
+    padding-right: 1.6rem;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-2);
+    white-space: nowrap;
+  }
+  .marquee__item svg {
+    width: 1.4rem;
+    color: var(--apricot);
+  }
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+</style>

@@ -1,0 +1,204 @@
+---
+import Photo from './Photo.astro';
+import { storefrontImage } from '../lib/images';
+import { site, hours } from '../data/site';
+const tel = site.phone.replace(/[^\d+]/g, '');
+---
+<section class="section visit" id="visit">
+  <div class="container visit__inner">
+    <div>
+      <p class="eyebrow" data-reveal>Visit us</p>
+      <h2 data-reveal style="--i:1">Come <em>say hi</em></h2>
+
+      <address class="visit__addr" data-reveal style="--i:2">
+        {site.address.line1}<br />
+        {site.address.line2}
+      </address>
+      <p class="visit__hint" data-reveal style="--i:2">Look for the glowing <strong>Sun Nails</strong> sign.</p>
+
+      <div class="visit__actions" data-reveal style="--i:3">
+        <a class="btn" href={site.address.mapsUrl} target="_blank" rel="noopener">Get directions</a>
+        <a class="btn btn--ghost" href={`tel:${tel}`}>Call {site.phone}</a>
+      </div>
+
+      {
+        (site.instagram || site.email) && (
+          <ul class="visit__links" data-reveal style="--i:4">
+            {site.instagram && (
+              <li>
+                <a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noopener">
+                  Instagram @{site.instagram}
+                </a>
+              </li>
+            )}
+            {site.email && (
+              <li>
+                <a href={`mailto:${site.email}`}>{site.email}</a>
+              </li>
+            )}
+          </ul>
+        )
+      }
+    </div>
+
+    <div class="hours" data-reveal style="--i:2">
+      <h3>Opening hours</h3>
+      <table>
+        <tbody>
+          {
+            hours.map((h, i) => (
+              <tr data-day={i}>
+                <th scope="row">{h.day}</th>
+                <td>{h.open && h.close ? `${h.open} – ${h.close}` : 'Closed'}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="visit__media">
+      {
+        storefrontImage && (
+          <div class="visit__store" data-reveal="polish">
+            <Photo src={storefrontImage} alt="Sun Nails storefront with its glowing bronze sign" sizes="(min-width: 900px) 50vw, 100vw" />
+          </div>
+        )
+      }
+      <div class="visit__map" data-reveal="polish" style="--i:1">
+        <iframe
+          title={`Map showing ${site.name}`}
+          src={site.address.embedUrl}
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .visit__inner {
+    display: grid;
+    gap: 3rem;
+  }
+  .visit h2 {
+    font-size: var(--step-3);
+  }
+  .visit__addr {
+    font-style: normal;
+    font-size: var(--step-1);
+    margin-top: 1.5rem;
+    line-height: 1.5;
+  }
+  .visit__hint {
+    margin-top: 0.5rem;
+    color: var(--text-muted);
+  }
+  .visit__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+  }
+  .visit__links {
+    list-style: none;
+    padding: 0;
+    margin: 1.75rem 0 0;
+    display: grid;
+    gap: 0.4rem;
+  }
+  .visit__links a {
+    display: inline-block;
+    padding-block: 0.5rem;
+    font-weight: 600;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--apricot);
+    overflow-wrap: anywhere;
+  }
+  .hours {
+    background: var(--sand);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    align-self: start;
+  }
+  .hours h3 {
+    font-size: var(--step-2);
+    margin-bottom: 1rem;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th,
+  td {
+    padding: 0.7rem 0.6rem;
+    text-align: left;
+    border-bottom: 1px dashed rgb(58 42 34 / 0.2);
+  }
+  th {
+    font-weight: 600;
+  }
+  td {
+    text-align: right;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  tr.is-today {
+    background: var(--cream);
+  }
+  tr.is-today th {
+    color: var(--terracotta-deep);
+    font-weight: 800;
+  }
+  tr.is-today th::after {
+    content: ' · today';
+    font-weight: 600;
+    font-size: var(--step--1);
+  }
+  tr.is-today td {
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .visit__media {
+    display: grid;
+    gap: 1rem;
+  }
+  .visit__store,
+  .visit__map {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: var(--sand);
+  }
+  .visit__store :global(img) {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+  .visit__map iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    min-height: 260px;
+    border: 0;
+    filter: sepia(0.25) saturate(0.9);
+  }
+
+  @media (min-width: 900px) {
+    .visit__inner {
+      grid-template-columns: 1.1fr 0.9fr;
+      column-gap: 5rem;
+    }
+    .visit__media {
+      grid-column: 1 / -1;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+  }
+</style>
+
+<script>
+  document.querySelector(`[data-day="${new Date().getDay()}"]`)?.classList.add('is-today');
+</script>

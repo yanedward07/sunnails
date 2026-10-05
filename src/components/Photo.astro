@@ -1,0 +1,40 @@
+---
+// Responsive image: real photos become AVIF/WebP srcsets, SVG placeholders pass through.
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  sizes: string;
+  class?: string;
+  eager?: boolean;
+}
+const { src, alt, sizes, class: className, eager = false } = Astro.props;
+const isSvg = src.format === 'svg';
+---
+{
+  isSvg ? (
+    <img
+      src={src.src}
+      width={src.width}
+      height={src.height}
+      alt={alt}
+      class={className}
+      loading={eager ? 'eager' : 'lazy'}
+      decoding="async"
+      fetchpriority={eager ? 'high' : 'auto'}
+    />
+  ) : (
+    <Picture
+      src={src}
+      alt={alt}
+      sizes={sizes}
+      widths={[400, 700, 1000, 1400]}
+      formats={['avif', 'webp']}
+      class={className}
+      loading={eager ? 'eager' : 'lazy'}
+      fetchpriority={eager ? 'high' : 'auto'}
+    />
+  )
+}
