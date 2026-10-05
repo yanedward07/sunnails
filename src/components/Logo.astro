@@ -1,5 +1,5 @@
 ---
-// Wordmark logo: "sunnails" set in Fraunces, with the dot of the "i" drawn as a rising sun.
+// Wordmark logo: "Sun Nails" set in Fraunces, with the dot of the "i" drawn as a rising sun.
 interface Props {
   size?: 'sm' | 'lg';
   tagline?: boolean;
@@ -8,7 +8,7 @@ const { size = 'sm', tagline = false } = Astro.props;
 ---
 <span class={`logo logo--${size}`} role="img" aria-label="Sun Nails">
   <span class="logo__word" aria-hidden="true">
-    sun<em>na<span class="logo__i">ı<svg class="logo__sun" viewBox="0 0 40 26">
+    Sun <em>Na<span class="logo__i">ı<svg class="logo__sun" viewBox="0 0 40 26">
           <g class="logo__rays" stroke="var(--gold)" stroke-width="3" stroke-linecap="round">
             <path d="M20 2v5M6 8l3.5 3.5M34 8l-3.5 3.5M1 19h5M34 19h5"></path>
           </g>

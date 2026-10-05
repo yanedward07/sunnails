@@ -2,6 +2,49 @@
 import Photo from './Photo.astro';
 import { nailImages } from '../lib/images';
 import { site } from '../data/site';
+
+// Desktop masonry: split the photos across 3 columns so the columns end as level as possible.
+// On phones the columns use `display: contents`, and `order` restores the original sequence for the swipe carousel.
+const COLS = 3;
+const GAP = 0.05; // gap between tiles, as a fraction of column width
+const sizes = nailImages.map((img) => img.src.height / img.src.width + GAP);
+
+// Greedy "shortest column" placement; for small galleries, search every split for the most even one.
+const greedy = () => {
+  const h = Array(COLS).fill(0);
+  return sizes.map((sz) => {
+    const c = h.indexOf(Math.min(...h));
+    h[c] += sz;
+    return c;
+  });
+};
+const spread = (assign: number[]) => {
+  const h = Array(COLS).fill(0);
+  assign.forEach((c, i) => (h[c] += sizes[i]));
+  return Math.max(...h) - Math.min(...h);
+};
+let best = greedy();
+if (sizes.length <= 13) {
+  let bestSpread = spread(best);
+  const assign: number[] = [];
+  const search = (i: number) => {
+    if (i === sizes.length) {
+      const sp = spread(assign);
+      if (sp < bestSpread) [bestSpread, best] = [sp, [...assign]];
+      return;
+    }
+    for (let c = 0; c < COLS; c++) {
+      // first photo stays top-left, and columns are only opened in order (skips mirror-image splits)
+      if (c > Math.max(-1, ...assign.slice(0, i)) + 1 || (i === 0 && c > 0)) break;
+      assign[i] = c;
+      search(i + 1);
+    }
+  };
+  search(0);
+}
+
+const columns: { img: (typeof nailImages)[number]; index: number }[][] = Array.from({ length: COLS }, () => []);
+nailImages.forEach((img, index) => columns[best[index]].push({ img, index }));
 ---
 <section class="section gallery" id="gallery">
   <div class="container">
@@ -19,17 +62,21 @@ import { site } from '../data/site';
       }
     </div>
 
-    <ul class="grid" data-gallery>
+    <div class="grid" role="list" data-gallery>
       {
-        nailImages.map((img, i) => (
-          <li class="tile">
-            <button class="tile__btn" data-index={i} data-reveal="polish" style={`--i:${i % 3}`} aria-label={`Open photo: ${img.alt}`}>
-              <Photo src={img.src} alt={img.alt} sizes="(min-width: 1100px) 380px, (min-width: 768px) 33vw, 75vw" />
-            </button>
-          </li>
+        columns.map((col, c) => (
+          <div class="col">
+            {col.map(({ img, index }) => (
+              <div class="tile" role="listitem" style={`order:${index}`}>
+                <button class="tile__btn" data-index={index} data-reveal="polish" style={`--i:${c}`} aria-label={`Open photo: ${img.alt}`}>
+                  <Photo src={img.src} alt={img.alt} sizes="(min-width: 1100px) 380px, (min-width: 768px) 33vw, 75vw" />
+                </button>
+              </div>
+            ))}
+          </div>
         ))
       }
-    </ul>
+    </div>
     <p class="gallery__hint" aria-hidden="true">Swipe <span>→</span></p>
   </div>
 
@@ -71,6 +118,9 @@ import { site } from '../data/site';
   }
   .grid::-webkit-scrollbar {
     display: none;
+  }
+  .col {
+    display: contents;
   }
   .tile {
     flex: 0 0 72%;
@@ -120,16 +170,32 @@ import { site } from '../data/site';
   /* desktop: masonry */
   @media (min-width: 768px) {
     .grid {
-      display: block;
-      columns: 3;
-      column-gap: 1.25rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
       margin: 0;
       padding: 0;
       overflow: visible;
     }
+    .col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
     .tile {
-      break-inside: avoid;
-      margin-bottom: 1.25rem;
+      flex: none;
+    }
+    /* last photo in each column stretches a touch so all three columns end flush */
+    .col > .tile:last-child {
+      flex: 1;
+    }
+    .col > .tile:last-child .tile__btn,
+    .col > .tile:last-child :global(picture) {
+      height: 100%;
+    }
+    .col > .tile:last-child :global(img) {
+      height: 100%;
+      object-fit: cover;
     }
     .tile :global(img) {
       aspect-ratio: auto;
@@ -213,7 +279,10 @@ import { site } from '../data/site';
 <script>
   const dialog = document.querySelector<HTMLDialogElement>('[data-lightbox]')!;
   const big = dialog.querySelector<HTMLImageElement>('[data-lightbox-img]')!;
-  const tiles = [...document.querySelectorAll<HTMLButtonElement>('[data-gallery] [data-index]')];
+  // DOM order is column-by-column, so sort back into the original photo order
+  const tiles = [...document.querySelectorAll<HTMLButtonElement>('[data-gallery] [data-index]')].sort(
+    (a, b) => Number(a.dataset.index) - Number(b.dataset.index),
+  );
   let current = 0;
 
   const show = (i: number) => {

@@ -26,14 +26,6 @@ const heroImg = heroImage
     </div>
 
     <div class="hero__art">
-      <div class="hero__sun" aria-hidden="true">
-        <svg viewBox="0 0 200 200">
-          <g stroke="var(--gold)" stroke-width="2.4" stroke-linecap="round">
-            {Array.from({ length: 24 }, (_, i) => <line x1="100" y1="6" x2="100" y2={i % 2 ? 18 : 26} transform={`rotate(${i * 15} 100 100)`} />)}
-          </g>
-        </svg>
-      </div>
-
       {
         heroImg && (
           <div class="hero__photo" data-reveal="polish" style="--i:1">
@@ -101,22 +93,6 @@ const heroImg = heroImage
     justify-self: center;
     width: min(82vw, 420px);
     aspect-ratio: 4 / 5;
-  }
-  .hero__sun {
-    position: absolute;
-    inset: -14%;
-  }
-  .hero__sun::before {
-    content: '';
-    position: absolute;
-    inset: 16%;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgb(233 148 91 / 0.5), rgb(242 196 179 / 0.25) 55%, transparent 70%);
-  }
-  .hero__sun svg {
-    position: relative;
-    width: 100%;
-    height: 100%;
   }
   .hero__photo {
     position: relative;
