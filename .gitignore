@@ -6,7 +6,8 @@ dist/
 .DS_Store
 .wrangler/
 
-# raw source photos / zips (the menu photo shows the WiFi password)
+# original photos from the owner (the menu photo shows the WiFi password)
+/source-photos/
 *.zip
 /*.jpg
 /*.jpeg

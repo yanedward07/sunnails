@@ -33,7 +33,7 @@ A one-page marketing + booking site for **Sun Nails**, a nail spa at 384 Yonge S
 - Don't invent business facts (reviews, certifications, prices). Real content comes from the owner. Leave a `// TODO` if something is unknown.
 - Gallery photos in `src/assets/nails/` are real client sets supplied by the owner. They are small (≤680px wide), and `Photo.astro` never upscales. Filenames become alt text, so name new files descriptively (`12-red-chrome-almond.jpg`).
 - The business name is always **Sun Nails** (two words, capitalised), never "sunnails". The logo is a text wordmark (`Logo.astro`): "Sun" + italic "Nails", with the dot of the i drawn as an SVG sun. There is no image logo file; keep it as live text.
-- Raw source photos/zips dropped in the project root stay out of git (`*.zip` and root-level images are ignored). The in-store menu photo shows the WiFi password, so never commit or publish it.
+- Original photos from the owner live in `source-photos/` (git-ignored, see its README); the site only uses the optimised copies in `src/assets/`. File new originals there instead of leaving them in the project root. `source-photos/menu/price-menu.jpeg` shows the WiFi password, so never commit or publish it.
 
 ## Open TODOs
 
