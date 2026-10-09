@@ -1,50 +1,57 @@
-/* Sunnails — "Golden Hour" brand tokens */
+/* Sun Nails — "Sea Glass" brand tokens */
 :root {
   /* Palette */
-  --cream: #fbf4ea;
-  --sand: #f3e3cf;
-  --sand-deep: #ead2b5;
-  --cocoa: #3a2a22;
-  --cocoa-soft: #6b5446;
-  --apricot: #e9945b;
-  --terracotta: #c9603f;
-  --terracotta-deep: #a84a2d;
-  --gold: #d9a441;
-  --blush: #f2c4b3;
-  --white: #fffdf9;
+  --frost: #f6faf9;
+  --foam: #e3f1ee;
+  --foam-deep: #cfe7e1;
+  --ink: #0f2e2e;
+  --ink-soft: #4a6563;
+  --teal: #2f8f83;
+  --teal-deep: #1d6b62;
+  --aqua: #7ccfc2;
+  --mint: #bfe3da;
+  --coral: #f4b6b0;
+  --white: #ffffff;
+
+  /* RGB channels, for translucent shades: rgb(var(--ink-rgb) / 0.2) */
+  --ink-rgb: 15 46 46;
+  --teal-rgb: 47 143 131;
+  --aqua-rgb: 124 207 194;
+  --frost-rgb: 246 250 249;
 
   /* Semantic */
-  --bg: var(--cream);
-  --surface: var(--sand);
-  --text: var(--cocoa);
-  --text-muted: var(--cocoa-soft);
-  --accent: var(--terracotta);
-  --cta-bg: var(--terracotta-deep);
+  --bg: var(--frost);
+  --surface: var(--foam);
+  --text: var(--ink);
+  --text-muted: var(--ink-soft);
+  --accent: var(--teal);
+  --cta-bg: var(--teal-deep);
   --cta-text: var(--white);
+  --line: rgb(var(--ink-rgb) / 0.14);
 
-  --glow: radial-gradient(60% 60% at 70% 30%, rgb(233 148 91 / 0.35), transparent 70%),
-    radial-gradient(50% 50% at 20% 80%, rgb(217 164 65 / 0.22), transparent 70%);
+  /* soft "light through water" wash */
+  --glow: radial-gradient(55% 60% at 75% 25%, rgb(var(--aqua-rgb) / 0.32), transparent 70%),
+    radial-gradient(45% 50% at 15% 85%, rgb(191 227 218 / 0.5), transparent 70%);
 
   /* Type */
-  --font-display: 'Fraunces Variable', 'Iowan Old Style', Georgia, serif;
-  --font-body: 'Manrope Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'Inter Tight Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   --step--1: clamp(0.83rem, 0.8rem + 0.15vw, 0.9rem);
   --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
-  --step-1: clamp(1.2rem, 1.1rem + 0.5vw, 1.45rem);
-  --step-2: clamp(1.5rem, 1.3rem + 1vw, 2.1rem);
-  --step-3: clamp(2rem, 1.6rem + 2vw, 3.2rem);
-  --step-4: clamp(2.7rem, 1.9rem + 4vw, 5.6rem);
+  --step-1: clamp(1.25rem, 1.12rem + 0.55vw, 1.55rem);
+  --step-2: clamp(1.6rem, 1.35rem + 1.1vw, 2.3rem);
+  --step-3: clamp(2.2rem, 1.7rem + 2.3vw, 3.6rem);
+  --step-4: clamp(3rem, 2rem + 4.6vw, 6.4rem);
 
   /* Space & shape */
   --gutter: clamp(1rem, 4vw, 2.5rem);
   --section: clamp(4.5rem, 10vw, 8.5rem);
   --max: 1200px;
-  --radius: 22px;
-  --radius-lg: 36px;
+  --radius: 18px;
+  --radius-lg: 28px;
   --pill: 999px;
-  --almond: 50% 50% 46% 46% / 62% 62% 38% 38%;
 
-  --shadow: 0 1px 2px rgb(58 42 34 / 0.06), 0 12px 32px -12px rgb(58 42 34 / 0.22);
+  --shadow: 0 1px 2px rgb(var(--ink-rgb) / 0.05), 0 14px 34px -14px rgb(var(--ink-rgb) / 0.22);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }

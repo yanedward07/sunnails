@@ -22,18 +22,14 @@ const items = [...marquee, ...marquee];
 <style>
   .marquee-wrap {
     overflow: hidden;
-    padding-block: 1.5rem;
-    margin-block: -1.5rem;
     position: relative;
     z-index: 2;
   }
   .marquee {
-    background: var(--cocoa);
-    color: var(--cream);
+    background: var(--ink);
+    color: var(--frost);
     overflow: hidden;
     padding-block: 1.1rem;
-    transform: rotate(-1.5deg);
-    margin-inline: -2rem;
     position: relative;
     z-index: 2;
   }
@@ -54,7 +50,7 @@ const items = [...marquee, ...marquee];
   }
   .marquee__item svg {
     width: 1.4rem;
-    color: var(--apricot);
+    color: var(--aqua);
   }
   @keyframes marquee {
     to {

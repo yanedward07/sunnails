@@ -51,18 +51,18 @@ const hasEmbed = VAGARO_EMBED.trim().length > 0;
 
 <style>
   .booking {
-    background: var(--cocoa);
-    color: var(--cream);
+    background: var(--ink);
+    color: var(--frost);
     overflow: hidden;
   }
   .booking .eyebrow {
-    color: var(--gold);
+    color: var(--aqua);
   }
   .booking h2 em {
-    color: var(--apricot);
+    color: var(--aqua);
   }
   .booking .section-head p {
-    color: rgb(251 244 234 / 0.75);
+    color: rgb(var(--frost-rgb) / 0.75);
   }
   .booking__sun {
     position: absolute;
@@ -71,7 +71,7 @@ const hasEmbed = VAGARO_EMBED.trim().length > 0;
     right: -30%;
     top: -35%;
     border-radius: 50%;
-    background: radial-gradient(circle, rgb(233 148 91 / 0.45), rgb(201 96 63 / 0.15) 45%, transparent 68%);
+    background: radial-gradient(circle, rgb(var(--aqua-rgb) / 0.45), rgb(var(--teal-rgb) / 0.15) 45%, transparent 68%);
     pointer-events: none;
     animation: breathe 9s ease-in-out infinite;
   }
@@ -85,7 +85,7 @@ const hasEmbed = VAGARO_EMBED.trim().length > 0;
     position: relative;
   }
   .card {
-    background: var(--cream);
+    background: var(--frost);
     color: var(--text);
     border-radius: var(--radius-lg);
     padding: clamp(0.75rem, 3vw, 2rem);
@@ -113,7 +113,7 @@ const hasEmbed = VAGARO_EMBED.trim().length > 0;
     width: 48px;
     height: 24px;
     border-radius: 48px 48px 0 0;
-    background: var(--apricot);
+    background: var(--teal);
     animation: bob 1.4s var(--ease) infinite;
   }
   @keyframes bob {
@@ -135,7 +135,7 @@ const hasEmbed = VAGARO_EMBED.trim().length > 0;
   }
   .soon a,
   .card__fallback a {
-    color: var(--terracotta-deep);
+    color: var(--teal-deep);
     font-weight: 700;
   }
   .card__fallback {

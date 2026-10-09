@@ -98,7 +98,7 @@ nailImages.forEach((img, index) => columns[best[index]].push({ img, index }));
   }
   .gallery__ig {
     font-weight: 700;
-    color: var(--terracotta-deep);
+    color: var(--teal-deep);
     margin-bottom: clamp(2rem, 5vw, 3.5rem);
     text-underline-offset: 4px;
   }
@@ -137,7 +137,7 @@ nailImages.forEach((img, index) => columns[best[index]].push({ img, index }));
     width: 100%;
     padding: 0;
     border: 0;
-    background: var(--sand);
+    background: var(--foam);
     cursor: zoom-in;
   }
   .tile :global(img) {
@@ -214,7 +214,7 @@ nailImages.forEach((img, index) => columns[best[index]].push({ img, index }));
     margin: 0;
     padding: 0;
     border: 0;
-    background: rgb(30 20 15 / 0.92);
+    background: rgb(var(--ink-rgb) / 0.92);
     display: none;
     place-items: center;
   }
@@ -238,8 +238,8 @@ nailImages.forEach((img, index) => columns[best[index]].push({ img, index }));
     height: 52px;
     border-radius: 50%;
     border: 0;
-    background: var(--cream);
-    color: var(--cocoa);
+    background: var(--frost);
+    color: var(--ink);
     font-size: 1.3rem;
     cursor: pointer;
   }

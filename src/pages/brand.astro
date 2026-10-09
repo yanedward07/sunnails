@@ -4,14 +4,14 @@ import Base from '../layouts/Base.astro';
 import Logo from '../components/Logo.astro';
 
 const colors = [
-  { name: 'Cream', hex: '#FBF4EA', use: 'Background' },
-  { name: 'Sand', hex: '#F3E3CF', use: 'Surfaces, cards' },
-  { name: 'Cocoa', hex: '#3A2A22', use: 'Text, dark sections' },
-  { name: 'Apricot', hex: '#E9945B', use: 'Sun, highlights' },
-  { name: 'Terracotta', hex: '#C9603F', use: 'Accent, italics' },
-  { name: 'Deep Terracotta', hex: '#A84A2D', use: 'Buttons, links' },
-  { name: 'Sun Gold', hex: '#D9A441', use: 'Rays, details' },
-  { name: 'Blush', hex: '#F2C4B3', use: 'Soft fills' },
+  { name: 'Frost', hex: '#F6FAF9', use: 'Background' },
+  { name: 'Seafoam', hex: '#E3F1EE', use: 'Surfaces, cards' },
+  { name: 'Deep Sea', hex: '#0F2E2E', use: 'Text, dark sections' },
+  { name: 'Sea Glass', hex: '#2F8F83', use: 'Accent, italics' },
+  { name: 'Deep Teal', hex: '#1D6B62', use: 'Buttons, links' },
+  { name: 'Aqua', hex: '#7CCFC2', use: 'Highlights on dark' },
+  { name: 'Mint', hex: '#BFE3DA', use: 'Soft fills' },
+  { name: 'Coral', hex: '#F4B6B0', use: 'Tiny accents only' },
 ];
 ---
 <Base title="Sunnails Brand Guide" noindex>
@@ -19,7 +19,7 @@ const colors = [
     <header class="b-section">
       <p class="eyebrow">Brand guide</p>
       <Logo size="lg" tagline />
-      <p class="lede">Mood: <strong>Golden Hour</strong>. Warm, sun-washed, soft and confident. Think late-afternoon light through a window and freshly polished nails catching it.</p>
+      <p class="lede">Mood: <strong>Sea Glass</strong>. Fresh, calm and professional. Think cool water, frosted glass and clean white light: a breath of fresh air on Yonge Street.</p>
     </header>
 
     <section class="b-section">
@@ -29,7 +29,7 @@ const colors = [
         <div class="logo-tile logo-tile--dark"><Logo size="lg" /></div>
         <div class="logo-tile"><img src="/favicon.svg" alt="Sunnails icon" width="96" height="96" /></div>
       </div>
-      <p class="note">The logo is a wordmark: "Sun" upright, "Nails" in terracotta italic, and the dot of the <em>i</em> drawn as a rising sun. The name is always written <strong>Sun Nails</strong>: two words, both capitalised. Keep clear space equal to the height of the "s" on every side. The sun on its own works as the app/social icon.</p>
+      <p class="note">The logo is a wordmark: "Sun" upright, "Nails" in sea-glass teal italic, and the dot of the <em>i</em> drawn as a rising sun. The name is always written <strong>Sun Nails</strong>: two words, both capitalised. Keep clear space equal to the height of the "s" on every side. The sun on its own works as the app/social icon.</p>
     </section>
 
     <section class="b-section">
@@ -52,11 +52,11 @@ const colors = [
       <h2>Typography</h2>
       <div class="type">
         <div>
-          <p class="label">Display: Fraunces (Soft), with italics for emphasis</p>
-          <p class="t-display">Nails that <em>glow</em></p>
+          <p class="label">Display: Instrument Serif, with italics for emphasis</p>
+          <p class="t-display">Relax, refresh, <em>renew</em></p>
         </div>
         <div>
-          <p class="label">Body / UI: Manrope</p>
+          <p class="label">Body / UI: Inter Tight</p>
           <p class="t-body">Gel, BIAB, nail art and slow, spa-style pedicures in a warm, sun-washed studio. Come in, sit back, leave glowing.</p>
         </div>
       </div>
@@ -69,8 +69,8 @@ const colors = [
         <a class="btn btn--ghost" href="#">See services</a>
       </div>
       <ul class="voice">
-        <li><strong>Warm, not fussy.</strong> "Come in, sit back, leave glowing."</li>
-        <li><strong>Sun words, used lightly:</strong> glow, golden, sunshine, sunset.</li>
+        <li><strong>Calm and confident.</strong> "Come in, sit back, leave glowing."</li>
+        <li><strong>Fresh words, used lightly:</strong> fresh, clean, calm, breathe.</li>
         <li><strong>Short sentences.</strong> Friendly, confident, never salesy.</li>
       </ul>
     </section>
@@ -83,7 +83,7 @@ const colors = [
   }
   .b-section {
     padding-block: 2.5rem;
-    border-bottom: 1px dashed rgb(58 42 34 / 0.2);
+    border-bottom: 1px dashed rgb(var(--ink-rgb) / 0.2);
   }
   header.b-section {
     display: flex;
@@ -110,11 +110,11 @@ const colors = [
     place-items: center;
     min-height: 180px;
     border-radius: var(--radius-lg);
-    background: var(--sand);
+    background: var(--foam);
   }
   .logo-tile--dark {
-    background: var(--cocoa);
-    color: var(--cream);
+    background: var(--ink);
+    color: var(--frost);
   }
   .note,
   .label {
@@ -138,7 +138,7 @@ const colors = [
   .chip {
     aspect-ratio: 1;
     border-radius: 50% 50% 46% 46% / 62% 62% 38% 38%;
-    box-shadow: inset 0 0 0 1px rgb(58 42 34 / 0.1), var(--shadow);
+    box-shadow: inset 0 0 0 1px rgb(var(--ink-rgb) / 0.1), var(--shadow);
     margin-bottom: 0.6rem;
   }
   .type {
@@ -147,12 +147,11 @@ const colors = [
   }
   .t-display {
     font-family: var(--font-display);
-    font-variation-settings: 'SOFT' 100, 'opsz' 144;
     font-size: var(--step-4);
     line-height: 1;
   }
   .t-display em {
-    color: var(--terracotta);
+    color: var(--teal);
   }
   .t-body {
     max-width: 36rem;

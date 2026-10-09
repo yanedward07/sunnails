@@ -1,5 +1,5 @@
 ---
-// Wordmark logo: "Sun Nails" set in Fraunces, with the dot of the "i" drawn as a rising sun.
+// Wordmark logo: "Sun Nails" set in Instrument Serif, with the dot of the "i" drawn as a rising sun.
 interface Props {
   size?: 'sm' | 'lg';
   tagline?: boolean;
@@ -9,10 +9,10 @@ const { size = 'sm', tagline = false } = Astro.props;
 <span class={`logo logo--${size}`} role="img" aria-label="Sun Nails">
   <span class="logo__word" aria-hidden="true">
     Sun <em>Na<span class="logo__i">ı<svg class="logo__sun" viewBox="0 0 40 26">
-          <g class="logo__rays" stroke="var(--gold)" stroke-width="3" stroke-linecap="round">
+          <g class="logo__rays" stroke="var(--aqua)" stroke-width="3" stroke-linecap="round">
             <path d="M20 2v5M6 8l3.5 3.5M34 8l-3.5 3.5M1 19h5M34 19h5"></path>
           </g>
-          <path d="M9 24a11 11 0 0 1 22 0z" fill="var(--apricot)"></path>
+          <path d="M9 24a11 11 0 0 1 22 0z" fill="var(--teal)"></path>
         </svg></span>ls</em>
   </span>
   {tagline && <span class="logo__tag" aria-hidden="true">nail spa · toronto</span>}
@@ -27,18 +27,17 @@ const { size = 'sm', tagline = false } = Astro.props;
   }
   .logo__word {
     font-family: var(--font-display);
-    font-variation-settings: 'SOFT' 100, 'opsz' 72;
-    font-weight: 450;
-    font-size: 1.75rem;
-    letter-spacing: -0.035em;
-    padding-top: 0.45em;
+    font-weight: 400;
+    font-size: 2.15rem;
+    letter-spacing: -0.01em;
+    padding-top: 0.5em;
   }
   .logo--lg .logo__word {
-    font-size: clamp(3rem, 10vw, 5.5rem);
+    font-size: clamp(3.4rem, 12vw, 6.5rem);
   }
   .logo__word em {
     font-style: italic;
-    color: var(--terracotta);
+    color: var(--teal);
   }
   .logo__i {
     position: relative;
@@ -46,11 +45,11 @@ const { size = 'sm', tagline = false } = Astro.props;
   /* the sun sits where the tittle of the i would be */
   .logo__sun {
     position: absolute;
-    width: 0.42em;
+    width: 0.34em;
     max-width: none;
     left: 50%;
-    bottom: 0.75em;
-    transform: translateX(-46%);
+    bottom: 0.88em;
+    transform: translateX(-36%);
     overflow: visible;
   }
   .logo__rays {

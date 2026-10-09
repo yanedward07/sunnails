@@ -53,7 +53,7 @@ import { services } from '../data/site';
 
 <style>
   .services {
-    background: linear-gradient(var(--bg), var(--sand) 30%, var(--sand));
+    background: linear-gradient(var(--bg), var(--foam) 30%, var(--foam));
   }
   .tabs {
     display: flex;
@@ -74,7 +74,7 @@ import { services } from '../data/site';
     min-height: 46px;
     padding: 0.6rem 1.3rem;
     border-radius: var(--pill);
-    border: 1.5px solid rgb(58 42 34 / 0.25);
+    border: 1.5px solid rgb(var(--ink-rgb) / 0.25);
     background: transparent;
     color: var(--text);
     font: 700 var(--step--1) / 1 var(--font-body);
@@ -83,16 +83,16 @@ import { services } from '../data/site';
     transition: background 0.3s, color 0.3s, border-color 0.3s;
   }
   .tabs button:hover {
-    border-color: var(--cocoa);
+    border-color: var(--ink);
   }
   .tabs button[aria-selected='true'] {
-    background: var(--cocoa);
-    border-color: var(--cocoa);
-    color: var(--cream);
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--frost);
   }
 
   .panel {
-    background: var(--cream);
+    background: var(--frost);
     border-radius: var(--radius-lg);
     padding: clamp(1.25rem, 4vw, 2.75rem);
     box-shadow: var(--shadow);
@@ -112,7 +112,6 @@ import { services } from '../data/site';
   }
   .item__name {
     font-family: var(--font-display);
-    font-variation-settings: 'SOFT' 100, 'opsz' 30;
     font-size: var(--step-1);
     line-height: 1.25;
   }
@@ -121,7 +120,7 @@ import { services } from '../data/site';
     margin-left: 0.5rem;
     padding: 0.1rem 0.55rem;
     border-radius: var(--pill);
-    background: var(--sand);
+    background: var(--foam);
     font: 700 0.75rem / 1.5 var(--font-body);
     letter-spacing: 0.04em;
     color: var(--text-muted);
@@ -130,13 +129,13 @@ import { services } from '../data/site';
   .item__dots {
     flex: 1;
     min-width: 1.5rem;
-    border-bottom: 2px dotted rgb(58 42 34 / 0.3);
+    border-bottom: 2px dotted rgb(var(--ink-rgb) / 0.3);
     transform: translateY(-0.3em);
   }
   .item__price {
     font-family: var(--font-display);
     font-size: var(--step-1);
-    color: var(--terracotta-deep);
+    color: var(--teal-deep);
     white-space: nowrap;
   }
   .panel__foot {

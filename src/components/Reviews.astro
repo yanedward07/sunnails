@@ -27,7 +27,7 @@ import { reviews } from '../data/site';
   .reviews {
     text-align: center;
     background:
-      radial-gradient(50% 70% at 50% 100%, rgb(233 148 91 / 0.22), transparent 70%),
+      radial-gradient(50% 70% at 50% 100%, rgb(var(--aqua-rgb) / 0.22), transparent 70%),
       var(--bg);
   }
   .reviews__inner {
@@ -55,7 +55,6 @@ import { reviews } from '../data/site';
   blockquote {
     margin: 0;
     font-family: var(--font-display);
-    font-variation-settings: 'SOFT' 100, 'opsz' 100;
     font-size: var(--step-3);
     line-height: 1.15;
     letter-spacing: -0.015em;
@@ -67,7 +66,7 @@ import { reviews } from '../data/site';
     letter-spacing: 0.15em;
     text-transform: uppercase;
     font-size: var(--step--1);
-    color: var(--terracotta-deep);
+    color: var(--teal-deep);
   }
   .dots {
     display: flex;
@@ -88,12 +87,12 @@ import { reviews } from '../data/site';
     width: 10px;
     height: 10px;
     border-radius: 999px;
-    background: rgb(58 42 34 / 0.25);
+    background: rgb(var(--ink-rgb) / 0.25);
     transition: width 0.4s var(--ease), background 0.4s;
   }
   .dots button[aria-current='true']::before {
     width: 26px;
-    background: var(--terracotta);
+    background: var(--teal);
   }
 </style>
 

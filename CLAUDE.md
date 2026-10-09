@@ -19,12 +19,13 @@ A one-page marketing + booking site for **Sun Nails**, a nail spa at 384 Yonge S
 - `src/scripts/reveal.ts` is the global scroll-reveal. Add `data-reveal` (fade/rise) or `data-reveal="polish"` (clip-path wipe) plus `style="--i:N"` for stagger. Polish elements are observed through their **parent** because Chrome's IntersectionObserver ignores fully clipped elements.
 - `public/_headers` holds the Cloudflare Pages headers. Don't add a strict CSP without allowing every domain the Vagaro widget loads from.
 
-## Brand: "Golden Hour"
+## Brand: "Sea Glass"
 
-- Tokens live in `src/styles/tokens.css`. Always use the variables, never raw hex: cream `--cream`, sand, cocoa (text), apricot, terracotta, `--terracotta-deep` (buttons/links), `--gold`, `--blush`.
-- Type: **Fraunces Variable** (display, `SOFT` 100, italic `<em>` in terracotta for emphasis) + **Manrope Variable** (body/UI). Fonts are self-hosted via Fontsource.
-- Motifs: the rising-sun arc and rays (from the shop's real menu-board logo), arch/almond image masks (`999px 999px 36px 36px`) and soft grain.
-- Voice: warm, short sentences, light "sun" wordplay. The shop's own line is "Relax. Refresh. Renew."
+- Fresh, calm and professional. **No yellow, gold or warm tones** (the owner rejected the earlier warm "Golden Hour" look).
+- Tokens live in `src/styles/tokens.css`. Always use the variables, never raw hex: `--frost` (bg), `--foam`/`--foam-deep` (surfaces), `--ink`/`--ink-soft` (text), `--teal` (accent, large text only), `--teal-deep` (buttons, links, small accent text), `--aqua` (highlights on dark), `--mint` (soft fills), `--coral` (tiny accents only). For translucency use the channel tokens: `rgb(var(--ink-rgb) / 0.2)`.
+- Type: **Instrument Serif** (display, regular + italic; italic `<em>` in teal for emphasis; no variable axes) + **Inter Tight Variable** (body/UI). Fonts are self-hosted via Fontsource.
+- Motifs: arch image masks (`999px 999px 36px 36px`), a soft aqua "light through water" glow, thin-line eyebrows. The small sun on the logo's i is the only sun motif.
+- Voice: calm, confident, short sentences. The shop's own line is "Relax. Refresh. Renew."
 
 ## Rules
 

@@ -44,7 +44,7 @@ const placeholders = ['Manicure bar', 'Nail art wall', 'Pedicure lounge'];
 
 <style>
   .space {
-    background: var(--sand);
+    background: var(--foam);
     overflow: hidden;
   }
   .space__inner {
@@ -80,8 +80,8 @@ const placeholders = ['Manicure bar', 'Nail art wall', 'Pedicure lounge'];
     width: 0.65rem;
     height: 0.65rem;
     border-radius: 50%;
-    background: var(--apricot);
-    box-shadow: 0 0 0 4px rgb(233 148 91 / 0.25);
+    background: var(--teal);
+    box-shadow: 0 0 0 4px rgb(var(--aqua-rgb) / 0.25);
   }
 
   .space__photos {
@@ -127,8 +127,8 @@ const placeholders = ['Manicure bar', 'Nail art wall', 'Pedicure lounge'];
     place-items: end start;
     padding: 1rem 1.2rem;
     background:
-      radial-gradient(80% 70% at 75% 20%, rgb(255 236 200 / 0.9), transparent 60%),
-      linear-gradient(160deg, var(--blush), var(--apricot) 70%, var(--terracotta));
+      radial-gradient(80% 70% at 75% 20%, rgb(255 255 255 / 0.85), transparent 60%),
+      linear-gradient(160deg, var(--mint), var(--teal) 70%, var(--teal));
     color: var(--white);
     font-family: var(--font-display);
     font-style: italic;
@@ -136,13 +136,13 @@ const placeholders = ['Manicure bar', 'Nail art wall', 'Pedicure lounge'];
   }
   .shot--2 .shot__ph {
     background:
-      radial-gradient(70% 60% at 30% 25%, rgb(255 240 210 / 0.9), transparent 60%),
-      linear-gradient(200deg, var(--sand-deep), var(--gold) 90%);
+      radial-gradient(70% 60% at 30% 25%, rgb(255 255 255 / 0.85), transparent 60%),
+      linear-gradient(200deg, var(--foam-deep), var(--aqua) 90%);
   }
   .shot--3 .shot__ph {
     background:
-      radial-gradient(70% 60% at 70% 30%, rgb(255 230 220 / 0.8), transparent 60%),
-      linear-gradient(140deg, var(--blush), var(--cocoa-soft));
+      radial-gradient(70% 60% at 70% 30%, rgb(255 255 255 / 0.75), transparent 60%),
+      linear-gradient(140deg, var(--mint), var(--ink-soft));
   }
 
   @media (min-width: 900px) {

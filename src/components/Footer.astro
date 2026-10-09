@@ -6,14 +6,14 @@ import { site } from '../data/site';
   <div class="container footer__inner">
     <Logo size="lg" tagline />
     <p class="footer__tag">{site.tagline}</p>
-    <a href="#book" class="btn">Book your glow</a>
-    <p class="footer__small">© {new Date().getFullYear()} {site.name}. Made with warm light.</p>
+    <a href="#book" class="btn">Book your visit</a>
+    <p class="footer__small">© {new Date().getFullYear()} {site.name}. Fresh nails on Yonge Street.</p>
   </div>
 </footer>
 
 <style>
   .footer {
-    background: linear-gradient(var(--bg), var(--blush));
+    background: linear-gradient(var(--bg), var(--mint));
     padding: var(--section) 0 calc(6.5rem + env(safe-area-inset-bottom));
     text-align: center;
   }
@@ -26,7 +26,7 @@ import { site } from '../data/site';
     font-family: var(--font-display);
     font-style: italic;
     font-size: var(--step-2);
-    color: var(--terracotta-deep);
+    color: var(--teal-deep);
   }
   .footer__small {
     margin-top: 2rem;
