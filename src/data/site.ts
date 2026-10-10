@@ -21,13 +21,29 @@ export const site = {
   instagram: '', // TODO: handle without @, e.g. 'sunnails.to', leave empty to hide
 };
 
-// ── Booking (Vagaro) ─────────────────────────────────────────
-// VAGARO_URL: your public Vagaro booking page, e.g. https://www.vagaro.com/sunnails
-// VAGARO_EMBED: paste the full widget code from Vagaro
-//   (Vagaro → Settings → Online Booking → Booking Widget → copy code).
-// Leave either one empty and the site shows a friendly fallback.
-export const VAGARO_URL = ''; // TODO: paste
-export const VAGARO_EMBED = ``; // TODO: paste between the backticks
+// ═════════════════════════════════════════════════════════════
+//  BOOKING (VAGARO): the only place booking is set up.
+//  Every "Book" button on the site leads to the Book section,
+//  which shows whichever of these you fill in:
+//
+//  1. VAGARO_URL: your public Vagaro booking page link.
+//     Find it in Vagaro: Settings → Online Booking → copy your booking link.
+//     Example: 'https://www.vagaro.com/sunnails'
+//     • Link only → the Book section shows a big "Book online" button.
+//
+//  2. VAGARO_EMBED: Vagaro's booking widget code (shows the booking
+//     calendar right on the site).
+//     Find it in Vagaro: Settings → Online Booking → Booking Widget → copy code.
+//     Paste the WHOLE code between the backticks ` ` below.
+//     • Widget → the calendar appears in the Book section, and the
+//       link above (if set) becomes a "Trouble loading?" backup.
+//
+//  Both empty → the Book section asks people to call or text instead.
+// ═════════════════════════════════════════════════════════════
+export const VAGARO_URL = ''; // TODO: paste your Vagaro booking link between the quotes
+
+export const VAGARO_EMBED = `
+`; // TODO: paste the Vagaro widget code between the backticks
 
 // ── Hours (0 = Sunday) ───────────────────────────────────────
 export const hours: { day: string; open: string | null; close: string | null }[] = [

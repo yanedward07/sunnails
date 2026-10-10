@@ -39,7 +39,13 @@ Drop images into these folders. They are resized and converted to AVIF/WebP auto
 2. Paste it between the backticks of `VAGARO_EMBED` in `src/data/site.ts`.
 3. Paste your public Vagaro page URL into `VAGARO_URL`. It's used as the "Trouble loading?" fallback link.
 
-Until then, the Book section shows a "call us" card. The widget only loads once a visitor scrolls near it, so it never slows down the first page load. After pasting the code, test it on a phone.
+What the Book section shows:
+
+- **Widget pasted:** the Vagaro calendar, plus a "Trouble loading?" link if `VAGARO_URL` is set.
+- **Only the link:** a "Book online" button that opens your Vagaro page.
+- **Neither:** a "call or text us" card.
+
+The widget only loads once a visitor scrolls near it, so it never slows down the first page load. After pasting the code, test it on a phone.
 
 ## Deploying (Cloudflare Pages + GitHub)
 

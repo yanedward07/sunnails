@@ -1,7 +1,10 @@
 ---
 import { site, VAGARO_URL, VAGARO_EMBED } from '../data/site';
 
+// Set both in src/data/site.ts. Widget wins; a link alone shows a "Book online" button.
 const hasEmbed = VAGARO_EMBED.trim().length > 0;
+const hasUrl = VAGARO_URL.trim().length > 0;
+const tel = site.phone.replace(/[^\d+]/g, '');
 ---
 <section class="section booking" id="book">
   <div class="booking__sun" aria-hidden="true"></div>
@@ -24,19 +27,29 @@ const hasEmbed = VAGARO_EMBED.trim().length > 0;
             </div>
             <template data-vagaro-embed set:html={VAGARO_EMBED} />
           </>
+        ) : hasUrl ? (
+          <div class="soon">
+            <p class="soon__title">Book in under a minute ✦</p>
+            <p>Choose your service and time on our secure Vagaro booking page.</p>
+            <a class="btn btn--light soon__cta" href={VAGARO_URL} target="_blank" rel="noopener">
+              Book online ↗
+            </a>
+            <p class="soon__alt">
+              Prefer to talk? Call or text <a href={`tel:${tel}`}>{site.phone}</a>
+            </p>
+          </div>
         ) : (
           <div class="soon">
             <p class="soon__title">Online booking is almost ready ✦</p>
             <p>
-              In the meantime, call or text us at{' '}
-              <a href={`tel:${site.phone.replace(/[^\d+]/g, '')}`}>{site.phone}</a> and we'll find you a spot.
+              In the meantime, call or text us at <a href={`tel:${tel}`}>{site.phone}</a> and we'll find you a spot.
             </p>
           </div>
         )
       }
 
       {
-        VAGARO_URL && (
+        hasEmbed && hasUrl && (
           <p class="card__fallback">
             Trouble loading?{' '}
             <a href={VAGARO_URL} target="_blank" rel="noopener">
@@ -154,6 +167,20 @@ const hasEmbed = VAGARO_EMBED.trim().length > 0;
   .card__fallback a {
     color: var(--white);
     font-weight: 700;
+  }
+  .soon__cta {
+    justify-self: center;
+    margin-top: 0.75rem;
+  }
+  /* white button so it stands out on the dark glass card */
+  .btn--light {
+    --_bg: var(--paper);
+    --_fg: var(--ink);
+  }
+  .soon__alt {
+    margin-top: 0.5rem;
+    font-size: var(--step--1);
+    color: var(--text-muted);
   }
   .card__fallback {
     text-align: center;
