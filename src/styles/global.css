@@ -61,7 +61,7 @@ p {
 }
 
 :focus-visible {
-  outline: 3px solid var(--teal-deep);
+  outline: 3px solid var(--ink);
   outline-offset: 3px;
   border-radius: 6px;
 }
@@ -84,7 +84,7 @@ p {
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--teal-deep);
+  color: var(--ink);
   margin-bottom: 1rem;
 }
 
@@ -131,7 +131,7 @@ p {
   text-decoration: none;
   cursor: pointer;
   transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), background 0.3s;
-  box-shadow: 0 10px 24px -12px rgb(var(--teal-rgb) / 0.6);
+  box-shadow: 0 10px 24px -12px rgb(var(--ink-rgb) / 0.6);
 }
 
 /* gold shimmer sweep */
@@ -147,7 +147,7 @@ p {
 
 .btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 30px -12px rgb(var(--teal-rgb) / 0.7);
+  box-shadow: 0 16px 30px -12px rgb(var(--ink-rgb) / 0.7);
 }
 
 .btn:hover::after {
@@ -155,14 +155,16 @@ p {
 }
 
 .btn--ghost {
-  --_bg: transparent;
+  --_bg: var(--glass-bg);
   --_fg: var(--text);
-  box-shadow: inset 0 0 0 1.5px var(--ink);
+  box-shadow: inset 0 0 0 1px rgb(var(--ink-rgb) / 0.85), 0 10px 24px -14px rgb(var(--ink-rgb) / 0.35);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
 }
 
 .btn--ghost:hover {
   --_bg: var(--ink);
-  --_fg: var(--frost);
+  --_fg: var(--paper);
   box-shadow: inset 0 0 0 1.5px var(--ink);
 }
 
@@ -170,6 +172,55 @@ p {
   min-height: 44px;
   padding: 0.6em 1.2em;
   font-size: var(--step--1);
+}
+
+/* ── Glass ───────────────────────────────── */
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+}
+
+.glass--dark {
+  background: var(--glass-dark-bg);
+  border: 1px solid var(--glass-dark-border);
+  box-shadow: inset 0 1px 0 rgb(var(--paper-rgb) / 0.12), 0 24px 50px -24px rgb(0 0 0 / 0.6);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+}
+
+/* soft silver glow blobs for glass to sit on; add to a section with position: relative */
+.chrome-glow {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.chrome-glow::before,
+.chrome-glow::after {
+  content: '';
+  position: absolute;
+  width: min(70vw, 620px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgb(var(--paper-rgb) / 0.95), rgb(var(--silver-rgb) / 0.9) 40%, rgb(var(--ink-rgb) / 0.12) 75%, transparent 76%);
+  filter: blur(40px);
+  opacity: 0.8;
+}
+
+.chrome-glow::before {
+  top: -10%;
+  right: -15%;
+}
+
+.chrome-glow::after {
+  bottom: -20%;
+  left: -20%;
+  width: min(60vw, 520px);
 }
 
 /* ── Scroll reveal ───────────────────────── */

@@ -52,17 +52,17 @@ const hasEmbed = VAGARO_EMBED.trim().length > 0;
 <style>
   .booking {
     background: var(--ink);
-    color: var(--frost);
+    color: var(--paper);
     overflow: hidden;
   }
   .booking .eyebrow {
-    color: var(--aqua);
+    color: var(--silver);
   }
   .booking h2 em {
-    color: var(--aqua);
+    color: var(--silver);
   }
   .booking .section-head p {
-    color: rgb(var(--frost-rgb) / 0.75);
+    color: rgb(var(--paper-rgb) / 0.75);
   }
   .booking__sun {
     position: absolute;
@@ -71,7 +71,7 @@ const hasEmbed = VAGARO_EMBED.trim().length > 0;
     right: -30%;
     top: -35%;
     border-radius: 50%;
-    background: radial-gradient(circle, rgb(var(--aqua-rgb) / 0.45), rgb(var(--teal-rgb) / 0.15) 45%, transparent 68%);
+    background: radial-gradient(circle, rgb(var(--silver-rgb) / 0.32), rgb(var(--silver-rgb) / 0.08) 45%, transparent 68%);
     pointer-events: none;
     animation: breathe 9s ease-in-out infinite;
   }
@@ -84,12 +84,29 @@ const hasEmbed = VAGARO_EMBED.trim().length > 0;
   .booking .container {
     position: relative;
   }
+  /* second, smaller glow low on the left so the glass card has something to frost */
+  .booking::before {
+    content: '';
+    position: absolute;
+    width: min(520px, 110vw);
+    aspect-ratio: 1;
+    left: -25%;
+    bottom: -30%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgb(var(--paper-rgb) / 0.22), transparent 65%);
+    pointer-events: none;
+  }
+  /* dark frosted glass over the silver glows */
   .card {
-    background: var(--frost);
-    color: var(--text);
+    --text-muted: rgb(var(--paper-rgb) / 0.72);
+    background: rgb(var(--paper-rgb) / 0.07);
+    color: var(--paper);
+    border: 1px solid var(--glass-dark-border);
     border-radius: var(--radius-lg);
     padding: clamp(0.75rem, 3vw, 2rem);
-    box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.5);
+    box-shadow: inset 0 1px 0 rgb(var(--paper-rgb) / 0.16), 0 30px 60px -30px rgb(0 0 0 / 0.7);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
     min-height: 260px;
   }
   .vagaro-mount {
@@ -113,7 +130,7 @@ const hasEmbed = VAGARO_EMBED.trim().length > 0;
     width: 48px;
     height: 24px;
     border-radius: 48px 48px 0 0;
-    background: var(--teal);
+    background: var(--silver);
     animation: bob 1.4s var(--ease) infinite;
   }
   @keyframes bob {
@@ -135,7 +152,7 @@ const hasEmbed = VAGARO_EMBED.trim().length > 0;
   }
   .soon a,
   .card__fallback a {
-    color: var(--teal-deep);
+    color: var(--white);
     font-weight: 700;
   }
   .card__fallback {

@@ -5,6 +5,7 @@ import { site, hours } from '../data/site';
 const tel = site.phone.replace(/[^\d+]/g, '');
 ---
 <section class="section visit" id="visit">
+  <div class="chrome-glow" aria-hidden="true"></div>
   <div class="container visit__inner">
     <div>
       <p class="eyebrow" data-reveal>Visit us</p>
@@ -41,7 +42,7 @@ const tel = site.phone.replace(/[^\d+]/g, '');
       }
     </div>
 
-    <div class="hours" data-reveal style="--i:2">
+    <div class="hours glass" data-reveal style="--i:2">
       <h3>Opening hours</h3>
       <table>
         <tbody>
@@ -78,7 +79,12 @@ const tel = site.phone.replace(/[^\d+]/g, '');
 </section>
 
 <style>
+  .visit {
+    overflow: hidden;
+  }
   .visit__inner {
+    position: relative;
+    z-index: 1;
     display: grid;
     gap: 3rem;
   }
@@ -113,11 +119,10 @@ const tel = site.phone.replace(/[^\d+]/g, '');
     padding-block: 0.5rem;
     font-weight: 600;
     text-underline-offset: 4px;
-    text-decoration-color: var(--teal);
+    text-decoration-color: var(--graphite);
     overflow-wrap: anywhere;
   }
   .hours {
-    background: var(--foam);
     border-radius: var(--radius-lg);
     padding: clamp(1.5rem, 4vw, 2.5rem);
     align-self: start;
@@ -145,10 +150,10 @@ const tel = site.phone.replace(/[^\d+]/g, '');
     white-space: nowrap;
   }
   tr.is-today {
-    background: var(--frost);
+    background: rgb(var(--paper-rgb) / 0.75);
   }
   tr.is-today th {
-    color: var(--teal-deep);
+    color: var(--ink);
     font-weight: 800;
   }
   tr.is-today th::after {
@@ -170,7 +175,7 @@ const tel = site.phone.replace(/[^\d+]/g, '');
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow);
-    background: var(--foam);
+    background: var(--mist);
   }
   .visit__store :global(img) {
     width: 100%;
@@ -183,7 +188,6 @@ const tel = site.phone.replace(/[^\d+]/g, '');
     aspect-ratio: 16 / 10;
     min-height: 260px;
     border: 0;
-    filter: grayscale(0.55) contrast(1.03);
   }
 
   @media (min-width: 900px) {

@@ -2,6 +2,7 @@
 import { services } from '../data/site';
 ---
 <section class="section services" id="services">
+  <div class="chrome-glow" aria-hidden="true"></div>
   <div class="container">
     <div class="section-head">
       <p class="eyebrow" data-reveal>Menu</p>
@@ -27,7 +28,7 @@ import { services } from '../data/site';
 
     {
       services.map((cat, i) => (
-        <div class="panel" role="tabpanel" id={`panel-${cat.id}`} aria-labelledby={`tab-${cat.id}`} hidden={i !== 0}>
+        <div class="panel glass" role="tabpanel" id={`panel-${cat.id}`} aria-labelledby={`tab-${cat.id}`} hidden={i !== 0}>
           <ul class="list">
             {cat.items.map((s, j) => (
               <li class="item" style={`--i:${j}`}>
@@ -53,7 +54,12 @@ import { services } from '../data/site';
 
 <style>
   .services {
-    background: linear-gradient(var(--bg), var(--foam) 30%, var(--foam));
+    background: linear-gradient(var(--bg), var(--mist) 30%, var(--mist));
+    overflow: hidden;
+  }
+  .services .container {
+    position: relative;
+    z-index: 1;
   }
   .tabs {
     display: flex;
@@ -74,8 +80,11 @@ import { services } from '../data/site';
     min-height: 46px;
     padding: 0.6rem 1.3rem;
     border-radius: var(--pill);
-    border: 1.5px solid rgb(var(--ink-rgb) / 0.25);
-    background: transparent;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    box-shadow: 0 6px 16px -10px rgb(var(--ink-rgb) / 0.3);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
     color: var(--text);
     font: 700 var(--step--1) / 1 var(--font-body);
     letter-spacing: 0.04em;
@@ -88,14 +97,12 @@ import { services } from '../data/site';
   .tabs button[aria-selected='true'] {
     background: var(--ink);
     border-color: var(--ink);
-    color: var(--frost);
+    color: var(--paper);
   }
 
   .panel {
-    background: var(--frost);
     border-radius: var(--radius-lg);
     padding: clamp(1.25rem, 4vw, 2.75rem);
-    box-shadow: var(--shadow);
   }
   .list {
     list-style: none;
@@ -120,7 +127,7 @@ import { services } from '../data/site';
     margin-left: 0.5rem;
     padding: 0.1rem 0.55rem;
     border-radius: var(--pill);
-    background: var(--foam);
+    background: var(--mist);
     font: 700 0.75rem / 1.5 var(--font-body);
     letter-spacing: 0.04em;
     color: var(--text-muted);
@@ -135,7 +142,7 @@ import { services } from '../data/site';
   .item__price {
     font-family: var(--font-display);
     font-size: var(--step-1);
-    color: var(--teal-deep);
+    color: var(--ink);
     white-space: nowrap;
   }
   .panel__foot {

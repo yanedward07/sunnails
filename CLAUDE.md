@@ -19,12 +19,13 @@ A one-page marketing + booking site for **Sun Nails**, a nail spa at 384 Yonge S
 - `src/scripts/reveal.ts` is the global scroll-reveal. Add `data-reveal` (fade/rise) or `data-reveal="polish"` (clip-path wipe) plus `style="--i:N"` for stagger. Polish elements are observed through their **parent** because Chrome's IntersectionObserver ignores fully clipped elements.
 - `public/_headers` holds the Cloudflare Pages headers. Don't add a strict CSP without allowing every domain the Vagaro widget loads from.
 
-## Brand: "Sea Glass"
+## Brand: "Monochrome Glass"
 
-- Fresh, calm and professional. **No yellow, gold or warm tones** (the owner rejected the earlier warm "Golden Hour" look).
-- Tokens live in `src/styles/tokens.css`. Always use the variables, never raw hex: `--frost` (bg), `--foam`/`--foam-deep` (surfaces), `--ink`/`--ink-soft` (text), `--teal` (accent, large text only), `--teal-deep` (buttons, links, small accent text), `--aqua` (highlights on dark), `--mint` (soft fills), `--coral` (tiny accents only). For translucency use the channel tokens: `rgb(var(--ink-rgb) / 0.2)`.
-- Type: **Instrument Serif** (display, regular + italic; italic `<em>` in teal for emphasis; no variable axes) + **Inter Tight Variable** (body/UI). Fonts are self-hosted via Fontsource.
-- Motifs: arch image masks (`999px 999px 36px 36px`), a soft aqua "light through water" glow, thin-line eyebrows. The small sun on the logo's i is the only sun motif.
+- Black and white, calm and professional, with frosted glass. **No colour in the UI**: no yellow/gold/warm tones (rejected "Golden Hour") and no teal (replaced "Sea Glass"). The nail and shop photos and the Google map (keep it unfiltered, the owner wants it in colour) are the only colour.
+- Tokens live in `src/styles/tokens.css`. Always use the variables, never raw hex: `--paper` (bg, pure white), `--mist`/`--mist-deep`/`--haze` (light greys), `--silver` (glows, highlights on dark), `--ink`/`--ink-soft` (text, buttons, dark sections), `--graphite` (italic accents). For translucency use the channel tokens: `rgb(var(--ink-rgb) / 0.2)`.
+- Glass: use the `.glass` / `.glass--dark` utility classes from `global.css` (or the `--glass-*` tokens) for frosted panels. Glass needs something behind it to blur, so put `<div class="chrome-glow" aria-hidden="true"></div>` in the section (section `overflow: hidden`, content `position: relative; z-index: 1`).
+- Type: **Instrument Serif** (display, regular + italic; italic `<em>` for emphasis; no variable axes) + **Inter Tight Variable** (body/UI). Fonts are self-hosted via Fontsource.
+- Motifs: arch image masks (`999px 999px 36px 36px`), soft silver chrome glows, frosted glass, thin-line eyebrows. The small sun on the logo's i is the only sun motif.
 - Voice: calm, confident, short sentences. The shop's own line is "Relax. Refresh. Renew."
 
 ## Rules

@@ -54,10 +54,10 @@ const links = [
     transition: background 0.4s, box-shadow 0.4s, backdrop-filter 0.4s;
   }
   .header.is-scrolled {
-    background: rgb(var(--frost-rgb) / 0.82);
-    backdrop-filter: blur(14px) saturate(1.4);
-    -webkit-backdrop-filter: blur(14px) saturate(1.4);
-    box-shadow: 0 1px 0 rgb(var(--ink-rgb) / 0.08);
+    background: rgb(var(--paper-rgb) / 0.74);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    box-shadow: inset 0 -1px 0 rgb(var(--paper-rgb) / 0.8), 0 1px 0 rgb(var(--ink-rgb) / 0.06);
   }
   .header__inner {
     display: flex;
@@ -89,7 +89,7 @@ const links = [
     bottom: 0;
     height: 2px;
     border-radius: 2px;
-    background: var(--teal);
+    background: var(--graphite);
     transform: scaleX(0);
     transform-origin: right;
     transition: transform 0.5s var(--ease);
@@ -109,7 +109,7 @@ const links = [
     border: 0;
     border-radius: 50%;
     background: var(--ink);
-    color: var(--frost);
+    color: var(--paper);
     display: grid;
     place-items: center;
     cursor: pointer;
@@ -137,7 +137,7 @@ const links = [
     position: fixed;
     inset: 0;
     z-index: 45;
-    background: var(--foam);
+    background: var(--mist);
     display: grid;
     align-content: center;
     padding: 6rem var(--gutter) calc(2rem + env(safe-area-inset-bottom));
@@ -177,7 +177,7 @@ const links = [
   }
   .menu .menu__book {
     font-style: italic;
-    color: var(--teal-deep);
+    color: var(--ink);
   }
   .menu__sun {
     position: absolute;
@@ -186,8 +186,9 @@ const links = [
     left: -10vw;
     bottom: -40vw;
     border-radius: 120vw 120vw 0 0;
-    background: radial-gradient(circle at 50% 100%, var(--teal), var(--mint) 60%, transparent 72%);
-    opacity: 0.55;
+    background: radial-gradient(circle at 50% 100%, rgb(var(--silver-rgb)), rgb(var(--paper-rgb) / 0.6) 55%, transparent 72%);
+    filter: blur(20px);
+    opacity: 0.9;
   }
 
   @media (min-width: 900px) {

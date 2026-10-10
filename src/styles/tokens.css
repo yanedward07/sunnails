@@ -1,37 +1,43 @@
-/* Sun Nails — "Sea Glass" brand tokens */
+/* Sun Nails — "Monochrome Glass" brand tokens */
 :root {
-  /* Palette */
-  --frost: #f6faf9;
-  --foam: #e3f1ee;
-  --foam-deep: #cfe7e1;
-  --ink: #0f2e2e;
-  --ink-soft: #4a6563;
-  --teal: #2f8f83;
-  --teal-deep: #1d6b62;
-  --aqua: #7ccfc2;
-  --mint: #bfe3da;
-  --coral: #f4b6b0;
+  /* Palette: black, white and soft greys. The photos bring the only colour. */
+  --paper: #ffffff;
+  --mist: #f4f4f5;
+  --mist-deep: #e4e4e7;
+  --haze: #ececee;
+  --silver: #d4d4d8;
+  --graphite: #3a3a3f;
+  --ink: #0b0b0c;
+  --ink-soft: #56565c;
   --white: #ffffff;
 
   /* RGB channels, for translucent shades: rgb(var(--ink-rgb) / 0.2) */
-  --ink-rgb: 15 46 46;
-  --teal-rgb: 47 143 131;
-  --aqua-rgb: 124 207 194;
-  --frost-rgb: 246 250 249;
+  --ink-rgb: 11 11 12;
+  --paper-rgb: 255 255 255;
+  --silver-rgb: 212 212 216;
 
   /* Semantic */
-  --bg: var(--frost);
-  --surface: var(--foam);
+  --bg: var(--paper);
+  --surface: var(--mist);
   --text: var(--ink);
   --text-muted: var(--ink-soft);
-  --accent: var(--teal);
-  --cta-bg: var(--teal-deep);
+  --accent: var(--graphite);
+  --cta-bg: var(--ink);
   --cta-text: var(--white);
-  --line: rgb(var(--ink-rgb) / 0.14);
+  --line: rgb(var(--ink-rgb) / 0.12);
 
-  /* soft "light through water" wash */
-  --glow: radial-gradient(55% 60% at 75% 25%, rgb(var(--aqua-rgb) / 0.32), transparent 70%),
-    radial-gradient(45% 50% at 15% 85%, rgb(191 227 218 / 0.5), transparent 70%);
+  /* Glass: frosted panels over soft silver "chrome" glows */
+  --glass-bg: rgb(var(--paper-rgb) / 0.55);
+  --glass-border: rgb(var(--paper-rgb) / 0.85);
+  --glass-blur: blur(20px) saturate(1.6);
+  --glass-shadow: inset 0 1px 0 rgb(var(--paper-rgb) / 0.9), 0 1px 2px rgb(var(--ink-rgb) / 0.04),
+    0 18px 40px -18px rgb(var(--ink-rgb) / 0.22);
+  --glass-dark-bg: rgb(30 30 34 / 0.5);
+  --glass-dark-border: rgb(var(--paper-rgb) / 0.14);
+
+  --glow: radial-gradient(45% 55% at 78% 22%, rgb(var(--silver-rgb) / 0.7), transparent 70%),
+    radial-gradient(40% 45% at 12% 88%, rgb(var(--silver-rgb) / 0.55), transparent 70%),
+    radial-gradient(30% 35% at 55% 55%, rgb(var(--paper-rgb) / 0.9), transparent 70%);
 
   /* Type */
   --font-display: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;

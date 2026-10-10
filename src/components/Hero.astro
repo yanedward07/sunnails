@@ -34,12 +34,17 @@ const heroImg = heroImage
         )
       }
 
+      <p class="hero__chip glass" data-reveal style="--i:3">
+        <span class="hero__dot" aria-hidden="true"></span>
+        {site.address.line1.split(',')[0]} · Toronto
+      </p>
+
       <a href="#book" class="hero__sticker" aria-label="Book online">
         <svg viewBox="0 0 120 120" aria-hidden="true">
           <defs><path id="circ" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"></path></defs>
-          <circle cx="60" cy="60" r="58" fill="var(--ink)"></circle>
+          <circle class="hero__sticker-disc" cx="60" cy="60" r="58"></circle>
           <text>
-            <textPath href="#circ" fill="var(--frost)" font-size="11.5" font-weight="700" letter-spacing="3.1">
+            <textPath href="#circ" fill="var(--paper)" font-size="11.5" font-weight="700" letter-spacing="3.1">
               BOOK ONLINE ✦ {site.name.toUpperCase()} ✦
             </textPath>
           </text>
@@ -115,9 +120,38 @@ const heroImg = heroImage
     aspect-ratio: 1;
     display: grid;
     place-items: center;
-    color: var(--aqua);
+    color: var(--white);
     text-decoration: none;
+    border-radius: 50%;
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    box-shadow: inset 0 0 0 1px var(--glass-dark-border), 0 16px 34px -14px rgb(0 0 0 / 0.5);
     transition: transform 0.5s var(--ease);
+  }
+  .hero__sticker-disc {
+    fill: rgb(var(--ink-rgb) / 0.62);
+  }
+  /* frosted location chip floating on the photo */
+  .hero__chip {
+    position: absolute;
+    right: -4%;
+    top: 14%;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 0;
+    padding: 0.6rem 1rem;
+    border-radius: var(--pill);
+    font-size: var(--step--1);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .hero__dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--ink);
+    box-shadow: 0 0 0 4px rgb(var(--ink-rgb) / 0.12);
   }
   .hero__sticker svg {
     position: absolute;

@@ -9,10 +9,10 @@ const { size = 'sm', tagline = false } = Astro.props;
 <span class={`logo logo--${size}`} role="img" aria-label="Sun Nails">
   <span class="logo__word" aria-hidden="true">
     Sun <em>Na<span class="logo__i">ı<svg class="logo__sun" viewBox="0 0 40 26">
-          <g class="logo__rays" stroke="var(--aqua)" stroke-width="3" stroke-linecap="round">
+          <g class="logo__rays" stroke="currentColor" stroke-opacity="0.55" stroke-width="3" stroke-linecap="round">
             <path d="M20 2v5M6 8l3.5 3.5M34 8l-3.5 3.5M1 19h5M34 19h5"></path>
           </g>
-          <path d="M9 24a11 11 0 0 1 22 0z" fill="var(--teal)"></path>
+          <path d="M9 24a11 11 0 0 1 22 0z" fill="currentColor"></path>
         </svg></span>ls</em>
   </span>
   {tagline && <span class="logo__tag" aria-hidden="true">nail spa · toronto</span>}
@@ -37,7 +37,6 @@ const { size = 'sm', tagline = false } = Astro.props;
   }
   .logo__word em {
     font-style: italic;
-    color: var(--teal);
   }
   .logo__i {
     position: relative;

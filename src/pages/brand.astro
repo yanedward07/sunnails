@@ -4,14 +4,12 @@ import Base from '../layouts/Base.astro';
 import Logo from '../components/Logo.astro';
 
 const colors = [
-  { name: 'Frost', hex: '#F6FAF9', use: 'Background' },
-  { name: 'Seafoam', hex: '#E3F1EE', use: 'Surfaces, cards' },
-  { name: 'Deep Sea', hex: '#0F2E2E', use: 'Text, dark sections' },
-  { name: 'Sea Glass', hex: '#2F8F83', use: 'Accent, italics' },
-  { name: 'Deep Teal', hex: '#1D6B62', use: 'Buttons, links' },
-  { name: 'Aqua', hex: '#7CCFC2', use: 'Highlights on dark' },
-  { name: 'Mint', hex: '#BFE3DA', use: 'Soft fills' },
-  { name: 'Coral', hex: '#F4B6B0', use: 'Tiny accents only' },
+  { name: 'Paper', hex: '#FFFFFF', use: 'Background' },
+  { name: 'Mist', hex: '#F4F4F5', use: 'Section tints' },
+  { name: 'Silver', hex: '#D4D4D8', use: 'Glows, highlights on dark' },
+  { name: 'Ink Soft', hex: '#56565C', use: 'Secondary text' },
+  { name: 'Graphite', hex: '#3A3A3F', use: 'Italic accents' },
+  { name: 'Ink', hex: '#0B0B0C', use: 'Text, buttons, dark sections' },
 ];
 ---
 <Base title="Sunnails Brand Guide" noindex>
@@ -19,7 +17,7 @@ const colors = [
     <header class="b-section">
       <p class="eyebrow">Brand guide</p>
       <Logo size="lg" tagline />
-      <p class="lede">Mood: <strong>Sea Glass</strong>. Fresh, calm and professional. Think cool water, frosted glass and clean white light: a breath of fresh air on Yonge Street.</p>
+      <p class="lede">Mood: <strong>Monochrome Glass</strong>. Black and white, calm and professional, with frosted-glass panels floating over soft silver light. The nail photos bring the only colour.</p>
     </header>
 
     <section class="b-section">
@@ -29,7 +27,7 @@ const colors = [
         <div class="logo-tile logo-tile--dark"><Logo size="lg" /></div>
         <div class="logo-tile"><img src="/favicon.svg" alt="Sunnails icon" width="96" height="96" /></div>
       </div>
-      <p class="note">The logo is a wordmark: "Sun" upright, "Nails" in sea-glass teal italic, and the dot of the <em>i</em> drawn as a rising sun. The name is always written <strong>Sun Nails</strong>: two words, both capitalised. Keep clear space equal to the height of the "s" on every side. The sun on its own works as the app/social icon.</p>
+      <p class="note">The logo is a wordmark: "Sun" upright, "Nails" in italic, all in one colour (black on light, white on dark), and the dot of the <em>i</em> drawn as a rising sun. The name is always written <strong>Sun Nails</strong>: two words, both capitalised. Keep clear space equal to the height of the "s" on every side. The sun on its own works as the app/social icon.</p>
     </section>
 
     <section class="b-section">
@@ -110,11 +108,11 @@ const colors = [
     place-items: center;
     min-height: 180px;
     border-radius: var(--radius-lg);
-    background: var(--foam);
+    background: var(--mist);
   }
   .logo-tile--dark {
     background: var(--ink);
-    color: var(--frost);
+    color: var(--paper);
   }
   .note,
   .label {
@@ -151,7 +149,7 @@ const colors = [
     line-height: 1;
   }
   .t-display em {
-    color: var(--teal);
+    color: var(--graphite);
   }
   .t-body {
     max-width: 36rem;
