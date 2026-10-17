@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-A one-page marketing + booking site for **Sun Nails**, a nail spa at 384 Yonge St, Unit 21 & 23, Toronto. It's a static Astro site deployed to Cloudflare Pages from GitHub (`main` → production). Booking is handled by an embedded Vagaro widget.
+A one-page marketing + booking site for **Sun Nails** (live at https://sunnail.ca), a nail spa at 384 Yonge St, Unit 21 & 23, Toronto. It's a static Astro site deployed to Cloudflare Pages from GitHub (`main` → production). Booking is handled by an embedded Vagaro widget.
 
 ## Commands
 
@@ -41,4 +41,3 @@ A one-page marketing + booking site for **Sun Nails**, a nail spa at 384 Yonge S
 
 - Paste the Vagaro embed code + URL into `site.ts`.
 - Higher-resolution nail photos if available, the Instagram handle, an email (optional) and real reviews.
-- Set the final domain in `astro.config.mjs` (`site`).
