@@ -40,10 +40,15 @@ export const site = {
 //
 //  Both empty → the Book section asks people to call or text instead.
 // ═════════════════════════════════════════════════════════════
-export const VAGARO_URL = ''; // TODO: paste your Vagaro booking link between the quotes
+export const VAGARO_URL = 'https://www.vagaro.com/sunnailsca';
 
 export const VAGARO_EMBED = `
-`; // TODO: paste the Vagaro widget code between the backticks
+<iframe
+  src="https://www.vagaro.com/Users/BusinessWidget.aspx?enc=MMLjhIwJMcwFQhXLL7ifVA5p7Pfal6QLRGA6w/zU0rPQHFE59Pas/bCF5IBScD8cjWEsGYlHF3ol7ne8SAptwp3hHmj1UbNGlM2Buf926rbL2E1mNg+Agka/m0GzjmMccPjtazUCip1wxSEVVrJage0IzHYYpTyv0oxQm4g8zWNhC5M3KBzyPRQcb6xIaPQ1KRKzNfRR+crwrvikfpop5elPUMIUp0d/3Q0KYYlbdpRUZ99+H4Z2R/6v/B+I22bMgBnS/lvFBP792Fu0Nj/7AI+iiZSVyxT7Zf9fIVFmGfpFO8qN5DH6lnXzkqFcEywrdHNk+dSvsw6D5MlDVaUwG3MooKUinv6NVLtgvGW8vxygrVe+o7L8Qya9V+rH/WsfOa3mQIoAoXAq3tXEi7kvYX3AZ+PqMx595vOaD0fDg833pyFURjmB7k0IY7icKJtQOF7OAZb1/mF6OSEBUZcdVA=="
+  title="Book an appointment at Sun Nails"
+  allow="payment"
+></iframe>
+`;
 
 // ── Hours (0 = Sunday) ───────────────────────────────────────
 export const hours: { day: string; open: string | null; close: string | null }[] = [
